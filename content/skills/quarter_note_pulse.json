@@ -1,0 +1,80 @@
+{
+  "schemaVersion": 1,
+  "skillId": "quarter_note_pulse",
+  "name": "Quarter-Note Pulse",
+  "timeSignature": "4/4",
+  "bpmDefault": 70,
+  "bpmRange": [50, 120],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Steady Alternation",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2
+      },
+      "templates": [
+        { "id": "qnp1_rlrl", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "L", "R", "L"], "difficulty": 1 },
+        { "id": "qnp1_lrlr", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "R", "L", "R"], "difficulty": 1 }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Lead-Hand Switching",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2
+      },
+      "templates": [
+        { "id": "qnp2_rlrl", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "L", "R", "L"], "difficulty": 1 },
+        { "id": "qnp2_lrlr", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "R", "L", "R"], "difficulty": 1 }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Doubles",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": true,
+        "minVariety": 3
+      },
+      "templates": [
+        { "id": "qnp3_rrll", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "R", "L", "L"], "difficulty": 1 },
+        { "id": "qnp3_llrr", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "L", "R", "R"], "difficulty": 1 },
+        { "id": "qnp3_rllr", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "L", "L", "R"], "difficulty": 2 },
+        { "id": "qnp3_lrrl", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "R", "R", "L"], "difficulty": 2 }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Free Sticking Reading",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": true,
+        "minVariety": 6
+      },
+      "templates": [
+        { "id": "qnp4_rrrr", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "R", "R", "R"], "difficulty": 1 },
+        { "id": "qnp4_llll", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "L", "L", "L"], "difficulty": 1 },
+        { "id": "qnp4_rrll", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "R", "L", "L"], "difficulty": 2 },
+        { "id": "qnp4_llrr", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "L", "R", "R"], "difficulty": 2 },
+        { "id": "qnp4_rllr", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "L", "L", "R"], "difficulty": 2 },
+        { "id": "qnp4_lrrl", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "R", "R", "L"], "difficulty": 2 },
+        { "id": "qnp4_rrlr", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "R", "L", "R"], "difficulty": 3 },
+        { "id": "qnp4_rlrr", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "L", "R", "R"], "difficulty": 3 },
+        { "id": "qnp4_lrll", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "R", "L", "L"], "difficulty": 3 },
+        { "id": "qnp4_llrl", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "L", "R", "L"], "difficulty": 3 },
+        { "id": "qnp4_rrrl", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "R", "R", "L"], "difficulty": 4 },
+        { "id": "qnp4_rlll", "rhythm": ["q", "q", "q", "q"], "sticking": ["R", "L", "L", "L"], "difficulty": 4 },
+        { "id": "qnp4_lrrr", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "R", "R", "R"], "difficulty": 4 },
+        { "id": "qnp4_lllr", "rhythm": ["q", "q", "q", "q"], "sticking": ["L", "L", "L", "R"], "difficulty": 4 }
+      ]
+    }
+  ]
+}
