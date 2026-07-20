@@ -4,34 +4,19 @@ workflows:
     max_build_duration: 60
     instance_type: mac_mini_m2
     integrations:
-      # Reuses the App Store Connect API key integration already set up for
-      # metronom-akort-app in the Codemagic team settings.
+      # App Store Connect API key integration (shared with metronom-akort-app).
       app_store_connect: metronometuner
     environment:
+      # Uses the account-level code signing identities: the "ios_distribution"
+      # certificate generated 2026-07-20 and the "onePad App Store"
+      # provisioning profile fetched from Apple. No secrets in env vars.
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.burakakkaya.onePad
       flutter: stable
       xcode: latest
       cocoapods: default
-      groups:
-        # Must contain CERTIFICATE_PRIVATE_KEY_B64 (same key as the
-        # metronome app's group; add this group to the one_pad app in the
-        # Codemagic UI).
-        - ios_signing
-      vars:
-        BUNDLE_ID: com.burakakkaya.onePad
     scripts:
-      - name: Set up keychain
-        script: keychain initialize
-      - name: Fetch signing files (create if missing)
-        script: |
-          # CERTIFICATE_PRIVATE_KEY_B64 is the PEM private key, base64-encoded
-          # so it survives being pasted into a single-line UI field intact.
-          export CERTIFICATE_PRIVATE_KEY=$(echo "$CERTIFICATE_PRIVATE_KEY_B64" | base64 --decode)
-          app-store-connect fetch-signing-files "$BUNDLE_ID" \
-            --type IOS_APP_STORE \
-            --certificate-key "$CERTIFICATE_PRIVATE_KEY" \
-            --create
-      - name: Add certificates to keychain
-        script: keychain add-certificates
       - name: Set up code signing
         script: xcode-project use-profiles
       - name: Get Flutter packages
