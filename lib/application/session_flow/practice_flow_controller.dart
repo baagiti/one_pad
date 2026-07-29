@@ -66,9 +66,16 @@ class PracticeFlowController extends ChangeNotifier {
   /// callback so the state machine itself stays storage-agnostic.
   void Function(Session session)? onSessionCompleted;
 
+  /// Only initializes [engine] here — [recorder] is lazily initialized on
+  /// the first actual [startRecording] call instead (2026-07-30). Both
+  /// flutter_soloud and flutter_recorder are built on the same miniaudio
+  /// native library; eagerly initializing both at app startup crashed real
+  /// iOS hardware ("RecorderInitializeFailedException: ... already inited?
+  /// on the C++ side") even though it never reproduced on Windows. Record
+  /// mode is also Premium-only, so most sessions never need the recorder at
+  /// all.
   Future<void> init() async {
     await engine.init();
-    await recorder.init();
   }
 
   /// Generates a fresh session from the skill/level. Resets the flow.
@@ -122,6 +129,7 @@ class PracticeFlowController extends ChangeNotifier {
   /// reference hits are always off and the microphone captures the take to
   /// [filePath] for later playback (and, in M4, onset scoring).
   Future<void> startRecording({required String filePath}) async {
+    await recorder.init();
     await _load(includeReferenceHits: false);
     _recordingPath = filePath;
     _isRecording = true;
