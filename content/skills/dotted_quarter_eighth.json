@@ -1,0 +1,228 @@
+{
+  "schemaVersion": 1,
+  "skillId": "dotted_quarter_eighth",
+  "name": "Dotted Quarter + Eighth",
+  "timeSignature": "4/4",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Dotted Quarter Against Quarters",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "dq1_r_dq",
+          "rhythm": [
+            "q.",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_l_dq",
+          "rhythm": [
+            "q.",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_r_qd",
+          "rhythm": [
+            "q",
+            "q",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_l_qd",
+          "rhythm": [
+            "q",
+            "q",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Dotted Quarter Against Eighths",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "dq2_r_de",
+          "rhythm": [
+            "q.",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_l_de",
+          "rhythm": [
+            "q.",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_r_ed",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_l_ed",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Full Dotted Quarter",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "dq3_r_dd",
+          "rhythm": [
+            "q.",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq3_l_dd",
+          "rhythm": [
+            "q.",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

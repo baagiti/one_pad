@@ -1,0 +1,325 @@
+{
+  "schemaVersion": 1,
+  "skillId": "roll_rudiments",
+  "name": "Rudiments: Roll Family",
+  "timeSignature": "4/4",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    120
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Double Stroke Roll",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "rr0_r",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "rr0_l",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "5-Stroke Roll",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "rr1_r",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "q>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "q>"
+          ],
+          "sticking": [
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "rr1_l",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "q>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "q>"
+          ],
+          "sticking": [
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "7-Stroke Roll",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "rr2_r",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e>"
+          ],
+          "sticking": [
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "rr2_l",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e>"
+          ],
+          "sticking": [
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "9-Stroke Roll",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "rr3_r",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "h>"
+          ],
+          "sticking": [
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "rr3_l",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "h>"
+          ],
+          "sticking": [
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "skillId": "alternate_meters_68",
+  "name": "Alternate Meters",
+  "timeSignature": "6/8",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 0,
+      "name": "How to Count: 6/8",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 1,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "hc0_a",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "&",
+            "a",
+            "2",
+            "&",
+            "a"
+          ]
+        },
+        {
+          "id": "hc0_b",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "&",
+            "a",
+            "2",
+            "&",
+            "a"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "name": "Full Eighth Stream in 6/8",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "am3_r",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am3_l",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Dotted-Quarter Pulse (Feeling the 2)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "am4_r",
+          "rhythm": [
+            "q.",
+            "q."
+          ],
+          "sticking": [
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am4_l",
+          "rhythm": [
+            "q.",
+            "q."
+          ],
+          "sticking": [
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Double Paradiddle",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "am5_r",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am5_l",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Single Paradiddle-Diddle",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "am6_r",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am6_l",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Duplets (2 Against the Grain)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "am7_r_p1",
+          "rhythm": [
+            "ed",
+            "ed",
+            "q."
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am7_l_p1",
+          "rhythm": [
+            "ed",
+            "ed",
+            "q."
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am7_r_p2",
+          "rhythm": [
+            "q.",
+            "ed",
+            "ed"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am7_l_p2",
+          "rhythm": [
+            "q.",
+            "ed",
+            "ed"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

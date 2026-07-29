@@ -1,0 +1,721 @@
+{
+  "schemaVersion": 1,
+  "skillId": "offbeat_eighth_notes",
+  "name": "Eighth Notes + Rests",
+  "timeSignature": "4/4",
+  "bpmDefault": 70,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "One Offbeat",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "ob1_r_o1",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o1",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_r_o2",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o2",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_r_o3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_r_o4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Two Offbeats",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 6,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "ob2_r_o13",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o13",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o14",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o14",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o24",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o24",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o12",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o12",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o23",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o23",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o34",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o34",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Three Offbeats",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "ob3_r_o234",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o234",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o134",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o134",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o124",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o124",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o123",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o123",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Full Offbeat (\"And\" Count)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "ob4_r_o1234",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob4_l_o1234",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

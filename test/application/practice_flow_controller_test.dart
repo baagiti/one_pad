@@ -6,6 +6,7 @@ import 'package:one_pad/application/session_flow/practice_flow_controller.dart';
 import 'package:one_pad/domain/content/content_loader.dart';
 import 'package:one_pad/domain/model/skill.dart';
 import 'package:one_pad/infrastructure/audio/audio_engine.dart';
+import 'package:one_pad/infrastructure/audio/audio_recorder.dart';
 import 'package:one_pad/infrastructure/audio/click_sounds.dart';
 
 class FakeAudioEngine implements AudioEngine {
@@ -40,9 +41,36 @@ class FakeAudioEngine implements AudioEngine {
   Future<void> dispose() async {}
 }
 
+class FakeAudioRecorder implements AudioRecorder {
+  bool initialized = false;
+  bool recording = false;
+  bool disposed = false;
+  List<String> startedPaths = [];
+  int stopCount = 0;
+
+  @override
+  Future<void> init() async => initialized = true;
+
+  @override
+  void startRecording(String filePath) {
+    recording = true;
+    startedPaths.add(filePath);
+  }
+
+  @override
+  void stopRecording() {
+    recording = false;
+    stopCount++;
+  }
+
+  @override
+  void dispose() => disposed = true;
+}
+
 void main() {
   late Skill skill;
   late FakeAudioEngine engine;
+  late FakeAudioRecorder recorder;
   late PracticeFlowController controller;
 
   setUpAll(() {
@@ -52,8 +80,10 @@ void main() {
 
   setUp(() {
     engine = FakeAudioEngine();
+    recorder = FakeAudioRecorder();
     controller = PracticeFlowController(
       engine: engine,
+      recorder: recorder,
       sounds: ClickSounds(sampleRate: PracticeFlowController.sampleRate),
       seed: 7,
     );
@@ -111,6 +141,38 @@ void main() {
     expect(controller.stage, FlowStage.finished);
   });
 
+  test('practice completion fires onSessionCompleted exactly once', () async {
+    var callCount = 0;
+    controller.onSessionCompleted = (_) => callCount++;
+
+    await controller.startPractice();
+    engine.fakePosition = afterCountIn();
+    controller.poll();
+    engine.playing = false;
+    controller.poll();
+    controller.poll(); // idempotent: already finished, no further callback
+    expect(callCount, 1);
+  });
+
+  test('preview completion does NOT fire onSessionCompleted', () async {
+    var callCount = 0;
+    controller.onSessionCompleted = (_) => callCount++;
+
+    await controller.startPreview();
+    engine.playing = false;
+    controller.poll();
+    expect(controller.stage, FlowStage.idle);
+    expect(callCount, 0);
+  });
+
+  test('changeBpm clamps to the skill bpm range', () async {
+    controller.changeBpm(skill.bpmMax + 50);
+    expect(controller.session!.bpm, skill.bpmMax);
+
+    controller.changeBpm(skill.bpmMin - 50);
+    expect(controller.session!.bpm, skill.bpmMin);
+  });
+
   test('changeBpm keeps the session content, re-maps the timeline (spec §4)',
       () async {
     final before =
@@ -129,5 +191,69 @@ void main() {
     await controller.stop();
     expect(controller.stage, FlowStage.idle);
     expect(engine.playing, isFalse);
+  });
+
+  test('startRecording forces reference hits off and starts the mic',
+      () async {
+    controller.referenceHits = true;
+    await controller.startRecording(filePath: 'take.wav');
+
+    expect(controller.stage, FlowStage.countIn);
+    expect(controller.isRecording, isTrue);
+    expect(controller.recordingPath, 'take.wav');
+    expect(recorder.recording, isTrue);
+    expect(recorder.startedPaths, ['take.wav']);
+  });
+
+  test('recording stops the mic exactly once when the session finishes',
+      () async {
+    await controller.startRecording(filePath: 'take.wav');
+    engine.fakePosition = afterCountIn();
+    controller.poll();
+    engine.playing = false;
+    controller.poll();
+
+    expect(controller.stage, FlowStage.finished);
+    expect(controller.isRecording, isFalse);
+    expect(recorder.stopCount, 1);
+    // recordingPath survives into the Results screen.
+    expect(controller.recordingPath, 'take.wav');
+  });
+
+  test('aborting a recording via stop() also stops the mic', () async {
+    await controller.startRecording(filePath: 'take.wav');
+    await controller.stop();
+
+    expect(controller.stage, FlowStage.idle);
+    expect(controller.isRecording, isFalse);
+    expect(recorder.stopCount, 1);
+  });
+
+  test('a plain practice run never touches the recorder and clears any '
+      'stale recordingPath', () async {
+    await controller.startRecording(filePath: 'take.wav');
+    engine.fakePosition = afterCountIn();
+    controller.poll();
+    engine.playing = false;
+    controller.poll();
+    expect(controller.recordingPath, isNotNull);
+
+    await controller.startPractice();
+
+    expect(controller.isRecording, isFalse);
+    expect(controller.recordingPath, isNull);
+    expect(recorder.stopCount, 1); // unchanged: no new recorder activity
+  });
+
+  test('generateSession resets recordingPath', () async {
+    await controller.startRecording(filePath: 'take.wav');
+    engine.fakePosition = afterCountIn();
+    controller.poll();
+    engine.playing = false;
+    controller.poll();
+    expect(controller.recordingPath, isNotNull);
+
+    controller.generateSession(skill: skill, level: 1);
+    expect(controller.recordingPath, isNull);
   });
 }

@@ -1,0 +1,934 @@
+{
+  "schemaVersion": 1,
+  "skillId": "eighth_notes",
+  "name": "Eighth Notes",
+  "timeSignature": "4/4",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 0,
+      "name": "How to Count: Eighth Notes",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 1,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "hc0_a",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ]
+        },
+        {
+          "id": "hc0_b",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "4",
+            "&"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "name": "One Eighth-Pair",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        {
+          "id": "en1_r_e1",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_l_e1",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_r_e2",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_l_e2",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_r_e3",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_l_e3",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_r_e4",
+          "rhythm": [
+            "q",
+            "q",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en1_l_e4",
+          "rhythm": [
+            "q",
+            "q",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ],
+      "note": "Vary the BPM as you practice — don't skip the slow tempos, they're where timing actually gets built."
+    },
+    {
+      "level": 2,
+      "name": "Two Eighth-Pairs (Spread)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 4
+      },
+      "templates": [
+        {
+          "id": "en2_r_e13",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en2_l_e13",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en2_r_e14",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en2_l_e14",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en2_r_e24",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en2_l_e24",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Two Eighth-Pairs (Consecutive)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 4
+      },
+      "templates": [
+        {
+          "id": "en3_r_e12",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en3_l_e12",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en3_r_e23",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en3_l_e23",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en3_r_e34",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en3_l_e34",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Three Eighth-Pairs",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        {
+          "id": "en4_r_e234",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_l_e234",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_r_e134",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_l_e134",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_r_e124",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_l_e124",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_r_e123",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en4_l_e123",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Full Stream: Steady Alternation",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "en5_a",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en5_b",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "name": "Full Stream: Lead-Hand Switching",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "en6_a",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "en6_b",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Full Stream: Doubles",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 3,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "en7_rrll",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 2
+        },
+        {
+          "id": "en7_llrr",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 2
+        },
+        {
+          "id": "en7_rllr",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R"
+          ],
+          "difficulty": 2
+        },
+        {
+          "id": "en7_lrrl",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L"
+          ],
+          "difficulty": 2
+        }
+      ]
+    }
+  ]
+}

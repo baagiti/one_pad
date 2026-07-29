@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "skillId": "quarter_note_rests",
+  "name": "Quarter Note Rests",
+  "timeSignature": "4/4",
+  "bpmDefault": 80,
+  "bpmRange": [30, 180],
+  "levels": [
+    {
+      "level": 0,
+      "name": "How to Count: Rests",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 1,
+        "sessionFixed": true
+      },
+      "templates": [
+        { "id": "hc0_a", "rhythm": ["q", "rq", "q", "rq"], "sticking": ["R", "L"], "difficulty": 1, "countingLabels": ["1", "2", "3", "4"] },
+        { "id": "hc0_b", "rhythm": ["rq", "q", "rq", "q"], "sticking": ["R", "L"], "difficulty": 1, "countingLabels": ["1", "2", "3", "4"] }
+      ]
+    },
+    {
+      "level": 1,
+      "name": "Single Rest",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        { "id": "qnr1_a_rest1", "rhythm": ["rq", "q", "q", "q"], "sticking": ["L", "R", "L"], "difficulty": 1 },
+        { "id": "qnr1_a_rest2", "rhythm": ["q", "rq", "q", "q"], "sticking": ["R", "R", "L"], "difficulty": 1 },
+        { "id": "qnr1_a_rest3", "rhythm": ["q", "q", "rq", "q"], "sticking": ["R", "L", "L"], "difficulty": 1 },
+        { "id": "qnr1_a_rest4", "rhythm": ["q", "q", "q", "rq"], "sticking": ["R", "L", "R"], "difficulty": 1 },
+        { "id": "qnr1_b_rest1", "rhythm": ["rq", "q", "q", "q"], "sticking": ["R", "L", "R"], "difficulty": 1 },
+        { "id": "qnr1_b_rest2", "rhythm": ["q", "rq", "q", "q"], "sticking": ["L", "L", "R"], "difficulty": 1 },
+        { "id": "qnr1_b_rest3", "rhythm": ["q", "q", "rq", "q"], "sticking": ["L", "R", "R"], "difficulty": 1 },
+        { "id": "qnr1_b_rest4", "rhythm": ["q", "q", "q", "rq"], "sticking": ["L", "R", "L"], "difficulty": 1 }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Two Rests (Spread)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 4
+      },
+      "templates": [
+        { "id": "qnr2_a_r13", "rhythm": ["rq", "q", "rq", "q"], "sticking": ["L", "L"], "difficulty": 1 },
+        { "id": "qnr2_a_r14", "rhythm": ["rq", "q", "q", "rq"], "sticking": ["L", "R"], "difficulty": 1 },
+        { "id": "qnr2_a_r24", "rhythm": ["q", "rq", "q", "rq"], "sticking": ["R", "R"], "difficulty": 1 },
+        { "id": "qnr2_b_r13", "rhythm": ["rq", "q", "rq", "q"], "sticking": ["R", "R"], "difficulty": 1 },
+        { "id": "qnr2_b_r14", "rhythm": ["rq", "q", "q", "rq"], "sticking": ["R", "L"], "difficulty": 1 },
+        { "id": "qnr2_b_r24", "rhythm": ["q", "rq", "q", "rq"], "sticking": ["L", "L"], "difficulty": 1 }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Two Rests (Consecutive)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 4
+      },
+      "templates": [
+        { "id": "qnr3_a_r12", "rhythm": ["rq", "rq", "q", "q"], "sticking": ["R", "L"], "difficulty": 1 },
+        { "id": "qnr3_a_r23", "rhythm": ["q", "rq", "rq", "q"], "sticking": ["R", "L"], "difficulty": 1 },
+        { "id": "qnr3_a_r34", "rhythm": ["q", "q", "rq", "rq"], "sticking": ["R", "L"], "difficulty": 1 },
+        { "id": "qnr3_b_r12", "rhythm": ["rq", "rq", "q", "q"], "sticking": ["L", "R"], "difficulty": 1 },
+        { "id": "qnr3_b_r23", "rhythm": ["q", "rq", "rq", "q"], "sticking": ["L", "R"], "difficulty": 1 },
+        { "id": "qnr3_b_r34", "rhythm": ["q", "q", "rq", "rq"], "sticking": ["L", "R"], "difficulty": 1 }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Three Rests (Single Hit)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        { "id": "qnr4_a_h1", "rhythm": ["q", "rq", "rq", "rq"], "sticking": ["R"], "difficulty": 1 },
+        { "id": "qnr4_a_h2", "rhythm": ["rq", "q", "rq", "rq"], "sticking": ["L"], "difficulty": 1 },
+        { "id": "qnr4_a_h3", "rhythm": ["rq", "rq", "q", "rq"], "sticking": ["R"], "difficulty": 1 },
+        { "id": "qnr4_a_h4", "rhythm": ["rq", "rq", "rq", "q"], "sticking": ["L"], "difficulty": 1 },
+        { "id": "qnr4_b_h1", "rhythm": ["q", "rq", "rq", "rq"], "sticking": ["L"], "difficulty": 1 },
+        { "id": "qnr4_b_h2", "rhythm": ["rq", "q", "rq", "rq"], "sticking": ["R"], "difficulty": 1 },
+        { "id": "qnr4_b_h3", "rhythm": ["rq", "rq", "q", "rq"], "sticking": ["L"], "difficulty": 1 },
+        { "id": "qnr4_b_h4", "rhythm": ["rq", "rq", "rq", "q"], "sticking": ["R"], "difficulty": 1 }
+      ]
+    }
+  ]
+}

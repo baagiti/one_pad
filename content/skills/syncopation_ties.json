@@ -1,0 +1,230 @@
+{
+  "schemaVersion": 1,
+  "skillId": "syncopation_ties",
+  "name": "Syncopation / Ties",
+  "timeSignature": "4/4",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Eighth + Dotted Quarter",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "st1_r_syncq",
+          "rhythm": [
+            "e",
+            "q.",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_l_syncq",
+          "rhythm": [
+            "e",
+            "q.",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_r_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q."
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_l_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q."
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Eighth-Quarter-Eighth",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "st2_r_syncq",
+          "rhythm": [
+            "e",
+            "q",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_l_syncq",
+          "rhythm": [
+            "e",
+            "q",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_r_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_l_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Tied Across Beat 3",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "st3_r",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q~",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st3_l",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q~",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

@@ -23,18 +23,23 @@ class NotationView extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        final measuresPerExercise =
+            session.exercises.isEmpty ? 1 : session.exercises.first.measureCount;
         final layout = NotationLayout(
           timeSignature: session.timeSignature,
           measureWidth:
               constraints.maxWidth / NotationLayout.measuresPerRow,
           rowHeight: constraints.maxHeight / NotationLayout.visibleRows,
-          measureCount: session.exercises.length,
+          measureCount: session.exercises.length * measuresPerExercise,
+          measuresPerExercise: measuresPerExercise,
+          beatGroupPattern: session.beatGroupPattern,
         );
 
         final pos = position;
         final isCountIn = pos?.isCountIn ?? true;
         final current =
             (pos == null || isCountIn || pos.isFinished) ? -1 : pos.exercise;
+        final currentMeasure = pos?.measureWithinExercise ?? 0;
         final targetScroll = current < 0 ? 0.0 : layout.scrollY(current);
         final playheadBeat = (pos != null && !isCountIn && !pos.isFinished)
             ? pos.beat + pos.beatFraction
@@ -53,6 +58,7 @@ class NotationView extends StatelessWidget {
                 style: NotationStyle.fromTheme(Theme.of(context)),
                 scrollY: scrollY,
                 currentExercise: current,
+                currentMeasureWithinExercise: currentMeasure,
                 playheadBeat: playheadBeat,
               ),
             );

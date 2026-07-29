@@ -7,6 +7,7 @@ import '../../domain/model/session.dart';
 import '../../domain/model/skill.dart';
 import '../../domain/timeline/timeline_map.dart';
 import '../../infrastructure/audio/audio_engine.dart';
+import '../../infrastructure/audio/audio_recorder.dart';
 import '../../infrastructure/audio/click_sounds.dart';
 import '../../infrastructure/audio/session_audio_renderer.dart';
 import '../../infrastructure/audio/wav_codec.dart';
@@ -25,11 +26,13 @@ class PracticeFlowController extends ChangeNotifier {
   static const sampleRate = 44100;
 
   final AudioEngine engine;
+  final AudioRecorder recorder;
   final ClickSounds sounds;
   final Random _rng;
 
   PracticeFlowController({
     required this.engine,
+    required this.recorder,
     required this.sounds,
     int? seed,
   }) : _rng = Random(seed);
@@ -43,10 +46,30 @@ class PracticeFlowController extends ChangeNotifier {
   TimelineMap? _map;
   TimelineMap? get map => _map;
 
+  int _bpmMin = 40;
+  int _bpmMax = 240;
+  int get bpmMin => _bpmMin;
+  int get bpmMax => _bpmMax;
+
   /// Preview option (spec §5). Practice playback never includes them.
   bool referenceHits = true;
 
-  Future<void> init() => engine.init();
+  bool _isRecording = false;
+  bool get isRecording => _isRecording;
+
+  String? _recordingPath;
+  String? get recordingPath => _recordingPath;
+
+  /// Fired exactly once, the moment a practice session completes (spec §4:
+  /// all 16 exercises played through). The UI layer wires this to
+  /// persistence (Home screen progress, design doc §14) — kept as a
+  /// callback so the state machine itself stays storage-agnostic.
+  void Function(Session session)? onSessionCompleted;
+
+  Future<void> init() async {
+    await engine.init();
+    await recorder.init();
+  }
 
   /// Generates a fresh session from the skill/level. Resets the flow.
   void generateSession({
@@ -54,18 +77,21 @@ class PracticeFlowController extends ChangeNotifier {
     required int level,
     int? bpm,
   }) {
+    _bpmMin = skill.bpmMin;
+    _bpmMax = skill.bpmMax;
     _session = SessionGenerator(seed: _rng.nextInt(1 << 31))
         .generate(skill: skill, levelNumber: level, bpm: bpm);
     _map = TimelineMap.forSession(_session!, sampleRate: sampleRate);
+    _recordingPath = null;
     _setStage(FlowStage.idle);
   }
 
   /// Changing BPM re-renders audio only; the session is never regenerated
-  /// (spec §4).
+  /// (spec §4). Clamped to the source skill's bpm range.
   void changeBpm(int bpm) {
     final s = _session;
     if (s == null) return;
-    _session = s.withBpm(bpm);
+    _session = s.withBpm(bpm.clamp(_bpmMin, _bpmMax));
     _map = TimelineMap.forSession(_session!, sampleRate: sampleRate);
     notifyListeners();
   }
@@ -77,18 +103,46 @@ class PracticeFlowController extends ChangeNotifier {
     _setStage(FlowStage.previewing);
   }
 
-  /// Practice playback: metronome only. Starts with the count-in measure;
-  /// [poll] flips countIn → practicing when the timeline crosses into
-  /// exercise 0.
+  /// Practice playback: metronome + per-note reference pad hits (spec §8's
+  /// unrecorded "Practice" mode — audible reference is fine because nothing
+  /// is captured). Starts with the count-in measure; [poll] flips
+  /// countIn → practicing when the timeline crosses into exercise 0.
+  ///
+  /// M3's "Record" mode must call this with reference hits OFF instead:
+  /// once a microphone is capturing, an audible reference risks bleeding
+  /// into the recording and corrupting M4's onset detection.
   Future<void> startPractice() async {
+    _recordingPath = null;
+    await _load(includeReferenceHits: true);
+    await engine.play();
+    _setStage(FlowStage.countIn);
+  }
+
+  /// Record mode (design doc §9's M3): identical timeline to practice, but
+  /// reference hits are always off and the microphone captures the take to
+  /// [filePath] for later playback (and, in M4, onset scoring).
+  Future<void> startRecording({required String filePath}) async {
     await _load(includeReferenceHits: false);
+    _recordingPath = filePath;
+    _isRecording = true;
+    // Starts capture first so the mic is already running when the count-in
+    // click fires — recorded takes should never miss their own first beat.
+    recorder.startRecording(filePath);
     await engine.play();
     _setStage(FlowStage.countIn);
   }
 
   Future<void> stop() async {
     await engine.stop();
+    _stopRecordingIfActive();
     _setStage(FlowStage.idle);
+  }
+
+  void _stopRecordingIfActive() {
+    if (_isRecording) {
+      recorder.stopRecording();
+      _isRecording = false;
+    }
   }
 
   /// Called from the UI frame ticker. Returns the current musical position
@@ -105,9 +159,12 @@ class PracticeFlowController extends ChangeNotifier {
 
     if (!engine.isPlaying) {
       // Stream ran out: preview returns to idle, practice completes.
+      final wasPracticing = _stage == FlowStage.practicing;
+      _stopRecordingIfActive();
       _setStage(_stage == FlowStage.previewing
           ? FlowStage.idle
           : FlowStage.finished);
+      if (wasPracticing) onSessionCompleted?.call(_session!);
       return pos;
     }
 
@@ -142,6 +199,7 @@ class PracticeFlowController extends ChangeNotifier {
   @override
   void dispose() {
     engine.dispose();
+    recorder.dispose();
     super.dispose();
   }
 }

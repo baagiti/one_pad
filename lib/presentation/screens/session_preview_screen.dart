@@ -2,16 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../application/session_flow/practice_flow_controller.dart';
+import '../../application/tempo/tap_tempo_calculator.dart';
 import '../../domain/timeline/timeline_map.dart';
+import '../../infrastructure/audio/recording_paths.dart';
+import '../../infrastructure/storage/app_database.dart';
 import '../notation/notation_view.dart';
+import '../theme/app_theme.dart';
+import '../widgets/drum_head_background.dart';
 import 'practice_screen.dart';
 
 /// Session Preview (spec §5): listen to the generated session with metronome
 /// and optional reference pad hits. Never recorded or analyzed.
 class SessionPreviewScreen extends StatefulWidget {
   final PracticeFlowController controller;
+  final AppDatabase db;
 
-  const SessionPreviewScreen({super.key, required this.controller});
+  /// This level's practice tip (`Level.note`), if it has one — shown as a
+  /// small hint above the action buttons.
+  final String? levelNote;
+
+  const SessionPreviewScreen({
+    super.key,
+    required this.controller,
+    required this.db,
+    this.levelNote,
+  });
 
   @override
   State<SessionPreviewScreen> createState() => _SessionPreviewScreenState();
@@ -21,6 +36,7 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
     with SingleTickerProviderStateMixin {
   late final Ticker _ticker;
   TimelinePosition? _pos;
+  final _tapTempo = TapTempoCalculator();
 
   PracticeFlowController get controller => widget.controller;
 
@@ -47,13 +63,45 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
     }
   }
 
+  void _nudgeBpm(int delta) {
+    setState(() => controller.changeBpm(controller.session!.bpm + delta));
+  }
+
+  void _onTapTempo() {
+    final bpm = _tapTempo.tap(DateTime.now());
+    if (bpm != null) {
+      setState(() => controller.changeBpm(bpm));
+    }
+  }
+
   Future<void> _beginPractice() async {
     _ticker.stop();
     await controller.stop();
     if (!mounted) return;
-    await Navigator.of(context).pushReplacement(MaterialPageRoute(
-      builder: (_) => PracticeScreen(controller: controller),
-    ));
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => PracticeScreen(controller: controller, db: widget.db),
+      ),
+    );
+  }
+
+  Future<void> _beginRecording() async {
+    _ticker.stop();
+    await controller.stop();
+
+    final filePath = await newRecordingFilePath(
+      skillId: controller.session!.skillId,
+    );
+    if (!mounted) return;
+    await Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (_) => PracticeScreen(
+          controller: controller,
+          db: widget.db,
+          recordingFilePath: filePath,
+        ),
+      ),
+    );
   }
 
   @override
@@ -71,50 +119,132 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
 
     return Scaffold(
       appBar: AppBar(title: const Text('Session Preview')),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text('${session.exercises.length} exercises · ${session.bpm} BPM',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.titleMedium),
-            const SizedBox(height: 12),
-            Expanded(
-              child: NotationView(session: session, position: _pos),
-            ),
-            SwitchListTile(
-              title: const Text('Reference hits'),
-              subtitle: const Text('Hear the pad strokes during preview'),
-              value: controller.referenceHits,
-              onChanged: previewing
-                  ? null
-                  : (v) => setState(() => controller.referenceHits = v),
-            ),
-            const SizedBox(height: 8),
-            Row(
+      body: Stack(
+        children: [
+          const Positioned.fill(child: DrumHeadBackground()),
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                _buildTempoRow(context, session.bpm, previewing),
+                if (widget.levelNote != null) ...[
+                  const SizedBox(height: 8),
+                  _buildLevelNote(context, widget.levelNote!),
+                ],
+                const SizedBox(height: 12),
                 Expanded(
-                  child: OutlinedButton.icon(
-                    onPressed: _togglePreview,
-                    icon: Icon(previewing ? Icons.stop : Icons.hearing),
-                    label: Text(previewing ? 'Stop' : 'Preview'),
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: AppColors.surface,
+                      borderRadius: BorderRadius.circular(16),
+                      border: Border.all(color: AppColors.outline),
+                    ),
+                    child: NotationView(session: session, position: _pos),
                   ),
                 ),
-                const SizedBox(width: 12),
-                Expanded(
-                  flex: 2,
-                  child: FilledButton.icon(
-                    onPressed: _beginPractice,
-                    icon: const Icon(Icons.play_arrow),
-                    label: const Text('Begin'),
+                SwitchListTile(
+                  title: const Text('Reference hits'),
+                  subtitle: const Text('Hear the pad strokes during preview'),
+                  value: controller.referenceHits,
+                  onChanged: previewing
+                      ? null
+                      : (v) => setState(() => controller.referenceHits = v),
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Expanded(
+                      child: OutlinedButton.icon(
+                        onPressed: _togglePreview,
+                        icon: Icon(previewing ? Icons.stop : Icons.hearing),
+                        label: Text(previewing ? 'Stop' : 'Preview'),
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      flex: 2,
+                      child: FilledButton.icon(
+                        onPressed: _beginPractice,
+                        icon: const Icon(Icons.play_arrow),
+                        label: const Text('Begin'),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton.icon(
+                  onPressed: previewing ? null : _beginRecording,
+                  icon: const Icon(
+                    Icons.fiber_manual_record,
+                    color: AppColors.error,
                   ),
+                  label: const Text('Record'),
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLevelNote(BuildContext context, String note) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Icon(
+          Icons.lightbulb_outline,
+          size: 16,
+          color: AppColors.secondary,
+        ),
+        const SizedBox(width: 6),
+        Expanded(
+          child: Text(
+            note,
+            style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTempoRow(BuildContext context, int bpm, bool previewing) {
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              onPressed: previewing ? null : () => _nudgeBpm(-1),
+              icon: const Icon(Icons.chevron_left),
+            ),
+            SizedBox(
+              width: 90,
+              child: Text(
+                '♩ = $bpm',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
+            IconButton(
+              onPressed: previewing ? null : () => _nudgeBpm(1),
+              icon: const Icon(Icons.chevron_right),
+            ),
+            const SizedBox(width: 12),
+            OutlinedButton(
+              onPressed: previewing ? null : _onTapTempo,
+              child: const Text('TAP TEMPO'),
+            ),
           ],
         ),
-      ),
+        const SizedBox(height: 4),
+        Text(
+          '${controller.session!.exercises.length} exercises',
+          style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+        ),
+      ],
     );
   }
 }

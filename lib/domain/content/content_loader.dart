@@ -37,6 +37,7 @@ class ContentLoader {
       bpmMin: bpmRange[0],
       bpmMax: bpmRange[1],
       levels: levels,
+      beatGroupPattern: (root['beatGroupPattern'] as List?)?.cast<int>(),
     );
   }
 
@@ -47,6 +48,7 @@ class ContentLoader {
       noAdjacentRepeat: g['noAdjacentRepeat'] as bool? ?? true,
       difficultyRamp: g['difficultyRamp'] as bool? ?? false,
       minVariety: g['minVariety'] as int? ?? 0,
+      sessionFixed: g['sessionFixed'] as bool? ?? false,
     );
 
     final templates = (l['templates'] as List)
@@ -67,6 +69,7 @@ class ContentLoader {
       name: l['name'] as String,
       generation: spec,
       templates: templates,
+      note: l['note'] as String?,
     );
   }
 
@@ -77,6 +80,7 @@ class ContentLoader {
         sticking:
             (t['sticking'] as List).cast<String>().map(Hand.parse).toList(),
         difficulty: t['difficulty'] as int,
+        countingLabels: (t['countingLabels'] as List?)?.cast<String>(),
       );
 
   GenerationStrategy _parseStrategy(String s) => switch (s) {

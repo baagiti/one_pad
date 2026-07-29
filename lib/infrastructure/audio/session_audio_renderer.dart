@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import '../../domain/analysis/expected_onsets.dart';
 import '../../domain/model/exercise.dart';
 import '../../domain/timeline/timeline_map.dart';
 import 'click_sounds.dart';
@@ -41,15 +42,8 @@ class SessionAudioRenderer {
 
     if (includeReferenceHits) {
       for (final e in exercises) {
-        var beatPos = 0.0;
-        for (final token in e.rhythm) {
-          if (!token.isRest) {
-            final offset = (map.samplesPerMeasure * (e.index + 1) +
-                    map.samplesPerBeat * beatPos)
-                .round();
-            _mix(acc, sounds.padHit, offset);
-          }
-          beatPos += token.lengthInBeats(map.timeSignature.beatUnit);
+        for (final offset in expectedOnsetSamples(map, e)) {
+          _mix(acc, sounds.padHit, offset);
         }
       }
     }

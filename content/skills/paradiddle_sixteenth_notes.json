@@ -1,0 +1,292 @@
+{
+  "schemaVersion": 1,
+  "skillId": "paradiddle_sixteenth_notes",
+  "name": "Rudiments (Sixteenth Notes)",
+  "timeSignature": "4/4",
+  "bpmDefault": 35,
+  "bpmRange": [
+    20,
+    80
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Single Paradiddle (Fixed Lead)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "psn1_r",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "psn1_l",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Single Paradiddle (Switching Lead)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "psn2_r",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "psn2_l",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Triple Paradiddle",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "psn3_r",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "psn3_l",
+          "rhythm": [
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s>",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

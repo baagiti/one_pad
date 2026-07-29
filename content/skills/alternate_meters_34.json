@@ -1,0 +1,163 @@
+{
+  "schemaVersion": 1,
+  "skillId": "alternate_meters_34",
+  "name": "Alternate Meters",
+  "timeSignature": "3/4",
+  "bpmDefault": 80,
+  "bpmRange": [
+    30,
+    180
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Quarter-Note Pulse in 3/4",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "am1_r",
+          "rhythm": [
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am1_l",
+          "rhythm": [
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Eighth-Note Pairs in 3/4",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 3,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "am2_r_b1",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am2_l_b1",
+          "rhythm": [
+            "e",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am2_r_b2",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am2_l_b2",
+          "rhythm": [
+            "q",
+            "e",
+            "e",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am2_r_b3",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "am2_l_b3",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

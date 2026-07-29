@@ -1,0 +1,337 @@
+{
+  "schemaVersion": 1,
+  "skillId": "paradiddle_eighth_notes",
+  "name": "Rudiments (Eighth Notes)",
+  "timeSignature": "4/4",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Single Paradiddle (Fixed Lead)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "pd1_r_pp",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "pd1_l_pp",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Single Paradiddle (Switching Lead)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "pd2_r_pp",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "pd2_l_pp",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Paradiddle + Alternation Mix",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "pd3_r_pa",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "pd3_l_pa",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "pd3_r_ap",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "pd3_l_ap",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Triple Paradiddle",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "pd4_r",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "pd4_l",
+          "rhythm": [
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e>",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

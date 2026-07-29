@@ -18,8 +18,8 @@ void main() {
     expect(skill.id, 'quarter_note_pulse');
     expect(skill.timeSignature, TimeSignature.fourFour);
     expect(skill.bpmDefault, 70);
-    expect(skill.bpmMin, 50);
-    expect(skill.bpmMax, 120);
+    expect(skill.bpmMin, 30);
+    expect(skill.bpmMax, 180);
   });
 
   test('has 4 levels with expected pool sizes', () {
@@ -53,6 +53,13 @@ void main() {
       final s = t.sticking.map((h) => h.label).join();
       expect(s, isNot(anyOf('RLRL', 'LRLR')), reason: t.id);
     }
+  });
+
+  test('level 1 carries a BPM-variety practice note, other levels none', () {
+    expect(skill.level(1).note, isNotNull);
+    expect(skill.level(2).note, isNull);
+    expect(skill.level(3).note, isNull);
+    expect(skill.level(4).note, isNull);
   });
 
   test('rejects unsupported schema version', () {

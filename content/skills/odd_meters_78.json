@@ -1,0 +1,191 @@
+{
+  "schemaVersion": 1,
+  "skillId": "odd_meters_78",
+  "name": "Odd Meters",
+  "timeSignature": "7/8",
+  "beatGroupPattern": [
+    2,
+    2,
+    3
+  ],
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 0,
+      "name": "How to Count: 7/8",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 1,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "hc0_a",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "a"
+          ]
+        },
+        {
+          "id": "hc0_b",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "&",
+            "2",
+            "&",
+            "3",
+            "&",
+            "a"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "name": "Full Eighth Stream in 7/8 (2+2+3)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "om3_r",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "om3_l",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Feeling the Groups (2+2+3 Pulse)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "om4_r",
+          "rhythm": [
+            "q",
+            "q",
+            "q."
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "om4_l",
+          "rhythm": [
+            "q",
+            "q",
+            "q."
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

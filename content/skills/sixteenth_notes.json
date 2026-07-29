@@ -1,0 +1,1622 @@
+{
+  "schemaVersion": 1,
+  "skillId": "sixteenth_notes",
+  "name": "Sixteenth Notes",
+  "timeSignature": "4/4",
+  "bpmDefault": 50,
+  "bpmRange": [
+    20,
+    100
+  ],
+  "levels": [
+    {
+      "level": 0,
+      "name": "How to Count: Sixteenth Notes",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 1,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "hc0_a",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "e",
+            "&",
+            "a",
+            "2",
+            "e",
+            "&",
+            "a",
+            "3",
+            "e",
+            "&",
+            "a",
+            "4",
+            "e",
+            "&",
+            "a"
+          ]
+        },
+        {
+          "id": "hc0_b",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "e",
+            "&",
+            "a",
+            "2",
+            "e",
+            "&",
+            "a",
+            "3",
+            "e",
+            "&",
+            "a",
+            "4",
+            "e",
+            "&",
+            "a"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "name": "Full Sixteenth Group",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        {
+          "id": "sn1_r_b1",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_l_b1",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_r_b2",
+          "rhythm": [
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_l_b2",
+          "rhythm": [
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_r_b3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_l_b3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_r_b4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn1_l_b4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ],
+      "note": "Vary the BPM as you practice — don't skip the slow tempos, they're where timing actually gets built."
+    },
+    {
+      "level": 2,
+      "name": "Two Sixteenths + Eighth",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        {
+          "id": "sn2_r_b1",
+          "rhythm": [
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_l_b1",
+          "rhythm": [
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_r_b2",
+          "rhythm": [
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_l_b2",
+          "rhythm": [
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_r_b3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_l_b3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_r_b4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn2_l_b4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Eighth + Two Sixteenths",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 5
+      },
+      "templates": [
+        {
+          "id": "sn3_r_b1",
+          "rhythm": [
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_l_b1",
+          "rhythm": [
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_r_b2",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_l_b2",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_r_b3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_l_b3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_r_b4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn3_l_b4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "name": "Sixteenth Rests",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 6
+      },
+      "templates": [
+        {
+          "id": "sn4_r_b1_lead",
+          "rhythm": [
+            "rs",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b1_lead",
+          "rhythm": [
+            "rs",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b1_trail",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "rs",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b1_trail",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "rs",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b2_lead",
+          "rhythm": [
+            "e",
+            "e",
+            "rs",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b2_lead",
+          "rhythm": [
+            "e",
+            "e",
+            "rs",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b2_trail",
+          "rhythm": [
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "rs",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b2_trail",
+          "rhythm": [
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "rs",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b3_lead",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "rs",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b3_lead",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "rs",
+            "s",
+            "s",
+            "s",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b3_trail",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "rs",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b3_trail",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "rs",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b4_lead",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "rs",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b4_lead",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "rs",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_r_b4_trail",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "rs"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn4_l_b4_trail",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "s",
+            "s",
+            "s",
+            "rs"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "name": "Full Stream: Steady Alternation",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "sn5_a",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn5_b",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "name": "Full Stream: Lead-Hand Switching",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "sn6_a",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn6_b",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Full Stream: Doubles",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 3,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "sn7_rrll",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn7_llrr",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn7_rllr",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "sn7_lrrl",
+          "rhythm": [
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s",
+            "s"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L",
+            "L",
+            "R",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

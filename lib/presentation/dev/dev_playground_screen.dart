@@ -216,14 +216,21 @@ class _DevPlaygroundScreenState extends State<DevPlaygroundScreen>
     if (pos == null || map == null) {
       return const Text('No session playing.');
     }
+    final measureLabel = map.measuresPerExercise > 1
+        ? ' (measure ${pos.measureWithinExercise + 1}/${map.measuresPerExercise})'
+        : '';
     final label = pos.isCountIn
         ? 'COUNT-IN — beat ${pos.beat + 1}/${map.timeSignature.beats}'
         : pos.isFinished
             ? 'Finished'
-            : 'Exercise ${pos.exercise + 1}/16 — beat ${pos.beat + 1}/${map.timeSignature.beats}';
+            : 'Exercise ${pos.exercise + 1}/16$measureLabel — beat ${pos.beat + 1}/${map.timeSignature.beats}';
     final progress = pos.isCountIn || pos.isFinished
         ? 0.0
-        : (pos.exercise + (pos.beat + pos.beatFraction) / map.timeSignature.beats) /
+        : (pos.exercise +
+                (pos.measureWithinExercise +
+                        (pos.beat + pos.beatFraction) /
+                            map.timeSignature.beats) /
+                    map.measuresPerExercise) /
             map.exerciseCount;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

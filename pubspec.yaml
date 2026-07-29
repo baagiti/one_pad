@@ -7,16 +7,48 @@ environment:
   sdk: ^3.12.2
 
 dependencies:
+  drift: ^2.34.2
+  fftea: ^1.5.0+1
   flutter:
     sdk: flutter
+  flutter_recorder: ^1.2.0
   flutter_soloud: ^4.0.12
+  path: ^1.9.1
+  path_provider: ^2.1.6
+  sqlite3_flutter_libs: ^0.6.0+eol
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  drift_dev: ^2.34.4
+  build_runner: ^2.15.1
 
 flutter:
   uses-material-design: true
   assets:
     - content/skills/quarter_note_pulse.json
+    - content/skills/quarter_note_rests.json
+    - content/skills/eighth_notes.json
+    - content/skills/offbeat_eighth_notes.json
+    - content/skills/dotted_quarter_eighth.json
+    - content/skills/paradiddle_eighth_notes.json
+    - content/skills/sixteenth_notes.json
+    - content/skills/paradiddle_sixteenth_notes.json
+    - content/skills/thirty_second_notes.json
+    - content/skills/syncopation_ties.json
+    - content/skills/alternate_meters_34.json
+    - content/skills/alternate_meters_68.json
+    - content/skills/odd_meters_54.json
+    - content/skills/odd_meters_78.json
+    - content/skills/triplets.json
+    - content/skills/roll_rudiments.json
+    - content/skills/performance_foundations.json
+    - content/skills/performance_syncopated_feel.json
+    - content/skills/performance_fast_subdivision.json
+    - content/skills/performance_rudiment_workout.json
+    - assets/images/drum_pad_bg.jpg
+  fonts:
+    - family: Bravura
+      fonts:
+        - asset: assets/fonts/Bravura.otf

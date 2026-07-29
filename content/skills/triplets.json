@@ -1,0 +1,597 @@
+{
+  "schemaVersion": 1,
+  "skillId": "triplets",
+  "name": "Triplets",
+  "timeSignature": "4/4",
+  "bpmDefault": 70,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 0,
+      "name": "How to Count: Triplets",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": false,
+        "difficultyRamp": false,
+        "minVariety": 1,
+        "sessionFixed": true
+      },
+      "templates": [
+        {
+          "id": "hc0_a",
+          "rhythm": [
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "trip",
+            "let",
+            "2",
+            "trip",
+            "let",
+            "3",
+            "trip",
+            "let",
+            "4",
+            "trip",
+            "let"
+          ]
+        },
+        {
+          "id": "hc0_b",
+          "rhythm": [
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et",
+            "et"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1,
+          "countingLabels": [
+            "1",
+            "trip",
+            "let",
+            "2",
+            "trip",
+            "let",
+            "3",
+            "trip",
+            "let",
+            "4",
+            "trip",
+            "let"
+          ]
+        }
+      ]
+    },
+    {
+      "level": 1,
+      "name": "Eighth-Note Triplets",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 4,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "tr1_r_b1",
+          "rhythm": [
+            "et",
+            "et",
+            "et",
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_l_b1",
+          "rhythm": [
+            "et",
+            "et",
+            "et",
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_r_b2",
+          "rhythm": [
+            "q",
+            "et",
+            "et",
+            "et",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_l_b2",
+          "rhythm": [
+            "q",
+            "et",
+            "et",
+            "et",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_r_b3",
+          "rhythm": [
+            "q",
+            "q",
+            "et",
+            "et",
+            "et",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_l_b3",
+          "rhythm": [
+            "q",
+            "q",
+            "et",
+            "et",
+            "et",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_r_b4",
+          "rhythm": [
+            "q",
+            "q",
+            "q",
+            "et",
+            "et",
+            "et"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr1_l_b4",
+          "rhythm": [
+            "q",
+            "q",
+            "q",
+            "et",
+            "et",
+            "et"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "name": "Quarter-Note Triplets",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 2,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "tr2_r_tq",
+          "rhythm": [
+            "qt",
+            "qt",
+            "qt",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr2_l_tq",
+          "rhythm": [
+            "qt",
+            "qt",
+            "qt",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr2_r_qt",
+          "rhythm": [
+            "q",
+            "q",
+            "qt",
+            "qt",
+            "qt"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr2_l_qt",
+          "rhythm": [
+            "q",
+            "q",
+            "qt",
+            "qt",
+            "qt"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "name": "Sixteenth-Note Triplets (Sextuplets)",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 4,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "tr3_r_b1",
+          "rhythm": [
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_l_b1",
+          "rhythm": [
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "q",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_r_b2",
+          "rhythm": [
+            "q",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_l_b2",
+          "rhythm": [
+            "q",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_r_b3",
+          "rhythm": [
+            "q",
+            "q",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_l_b3",
+          "rhythm": [
+            "q",
+            "q",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_r_b4",
+          "rhythm": [
+            "q",
+            "q",
+            "q",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "tr3_l_b4",
+          "rhythm": [
+            "q",
+            "q",
+            "q",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st",
+            "st"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

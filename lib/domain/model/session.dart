@@ -15,6 +15,10 @@ class Session {
 
   final TimeSignature timeSignature;
 
+  /// Explicit notation beam-grouping snapshot from the source skill (design
+  /// doc §26) — null when the meter's grouping can be derived automatically.
+  final List<int>? beatGroupPattern;
+
   /// Changing BPM never regenerates the session (spec §4); it only re-renders
   /// the audio timeline.
   final int bpm;
@@ -27,6 +31,7 @@ class Session {
     required this.skillId,
     required this.level,
     required this.timeSignature,
+    this.beatGroupPattern,
     required this.bpm,
     required this.exercises,
   }) {
@@ -42,6 +47,7 @@ class Session {
         skillId: skillId,
         level: level,
         timeSignature: timeSignature,
+        beatGroupPattern: beatGroupPattern,
         bpm: newBpm,
         exercises: exercises,
       );

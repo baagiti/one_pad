@@ -1,0 +1,1036 @@
+{
+  "schemaVersion": 1,
+  "skillId": "performance_syncopated_feel",
+  "name": "Performance: Syncopated Feel",
+  "timeSignature": "4/4",
+  "bpmDefault": 60,
+  "bpmRange": [
+    30,
+    140
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "name": "Performance: Syncopated Feel",
+      "generation": {
+        "strategy": "pool_shuffle",
+        "noAdjacentRepeat": true,
+        "difficultyRamp": false,
+        "minVariety": 10,
+        "sessionFixed": false
+      },
+      "templates": [
+        {
+          "id": "ob1_r_o1",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o1",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_r_o2",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o2",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_r_o3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o3",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_r_o4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob1_l_o4",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o13",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o13",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o14",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o14",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o24",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o24",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o12",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o12",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o23",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o23",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_r_o34",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob2_l_o34",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o234",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o234",
+          "rhythm": [
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o134",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o134",
+          "rhythm": [
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o124",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o124",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_r_o123",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob3_l_o123",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob4_r_o1234",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "ob4_l_o1234",
+          "rhythm": [
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e",
+            "re",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_r_dq",
+          "rhythm": [
+            "q.",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_l_dq",
+          "rhythm": [
+            "q.",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_r_qd",
+          "rhythm": [
+            "q",
+            "q",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq1_l_qd",
+          "rhythm": [
+            "q",
+            "q",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_r_de",
+          "rhythm": [
+            "q.",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_l_de",
+          "rhythm": [
+            "q.",
+            "e",
+            "e",
+            "e",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_r_ed",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq2_l_ed",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq3_r_dd",
+          "rhythm": [
+            "q.",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "dq3_l_dd",
+          "rhythm": [
+            "q.",
+            "e",
+            "q.",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_r_syncq",
+          "rhythm": [
+            "e",
+            "q.",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_l_syncq",
+          "rhythm": [
+            "e",
+            "q.",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_r_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q."
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st1_l_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q."
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_r_syncq",
+          "rhythm": [
+            "e",
+            "q",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_l_syncq",
+          "rhythm": [
+            "e",
+            "q",
+            "e",
+            "q",
+            "q"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_r_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st2_l_qsync",
+          "rhythm": [
+            "q",
+            "q",
+            "e",
+            "q",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st3_r",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q~",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "R",
+            "L",
+            "R",
+            "L",
+            "R",
+            "L"
+          ],
+          "difficulty": 1
+        },
+        {
+          "id": "st3_l",
+          "rhythm": [
+            "e",
+            "e",
+            "e",
+            "e",
+            "q~",
+            "e",
+            "e"
+          ],
+          "sticking": [
+            "L",
+            "R",
+            "L",
+            "R",
+            "L",
+            "R"
+          ],
+          "difficulty": 1
+        }
+      ]
+    }
+  ]
+}

@@ -17,13 +17,22 @@ class TimelineMap {
   final int sampleRate;
   final int exerciseCount;
 
+  /// How many measures each exercise occupies — 1 in the common case, but
+  /// 2+ for rudiments that don't fit a single measure (e.g. the Triple
+  /// Paradiddle at eighth-note speed, design doc §23). Uniform across a
+  /// whole session (one level's template pool is always uniform in
+  /// length).
+  final int measuresPerExercise;
+
   TimelineMap({
     required this.timeSignature,
     required this.bpm,
     required this.sampleRate,
     this.exerciseCount = Session.exerciseCount,
+    this.measuresPerExercise = 1,
   })  : assert(bpm > 0),
-        assert(sampleRate > 0);
+        assert(sampleRate > 0),
+        assert(measuresPerExercise > 0);
 
   TimelineMap.forSession(Session session, {required int sampleRate})
       : this(
@@ -31,6 +40,9 @@ class TimelineMap {
           bpm: session.bpm,
           sampleRate: sampleRate,
           exerciseCount: session.exercises.length,
+          measuresPerExercise: session.exercises.isEmpty
+              ? 1
+              : session.exercises.first.measureCount,
         );
 
   /// Duration of one beat in samples. Kept as double: rounding only happens
@@ -43,24 +55,46 @@ class TimelineMap {
   int get countInSamples => samplesPerMeasure.round();
 
   int get totalSamples =>
-      (samplesPerMeasure * (exerciseCount + 1)).round();
+      (samplesPerMeasure * (exerciseCount * measuresPerExercise + 1)).round();
+
+  /// Global (0-based, count-in-aware) measure index where [exercise]
+  /// starts — measure 0 is always the count-in, so exercise 0 starts at
+  /// measure 1 regardless of [measuresPerExercise].
+  int baseMeasureOfExercise(int exercise) =>
+      exercise * measuresPerExercise + 1;
 
   /// Sample offset of a beat within a given exercise (both 0-based).
-  /// Exercise -1 addresses the count-in measure.
-  int sampleOfBeat({required int exercise, required int beat}) {
-    final measureIndex = exercise + 1; // count-in occupies measure 0
+  /// Exercise -1 addresses the count-in measure. [measureWithinExercise]
+  /// selects which of a multi-measure exercise's measures [beat] is
+  /// counted from (default 0, the exercise's first measure).
+  int sampleOfBeat({
+    required int exercise,
+    required int beat,
+    int measureWithinExercise = 0,
+  }) {
+    final measureIndex =
+        baseMeasureOfExercise(exercise) + measureWithinExercise;
     return (samplesPerMeasure * measureIndex + samplesPerBeat * beat).round();
   }
 
   /// Musical position for a stream position. During count-in,
-  /// [TimelinePosition.exercise] is -1.
+  /// [TimelinePosition.exercise] is -1. [TimelinePosition.beat] is always
+  /// the beat WITHIN THE CURRENT MEASURE (0..timeSignature.beats-1) —
+  /// [TimelinePosition.measureWithinExercise] says which of the current
+  /// exercise's measures that is, for exercises spanning more than one.
   TimelinePosition positionAt(int samples) {
     final clamped = samples.clamp(0, totalSamples - 1);
     final measure = clamped ~/ samplesPerMeasure;
     final withinMeasure = clamped - measure * samplesPerMeasure;
     final beatDouble = withinMeasure / samplesPerBeat;
+    final measureSinceCountIn = measure - 1;
     return TimelinePosition(
-      exercise: measure - 1,
+      exercise: measureSinceCountIn >= 0
+          ? measureSinceCountIn ~/ measuresPerExercise
+          : -1,
+      measureWithinExercise: measureSinceCountIn >= 0
+          ? measureSinceCountIn % measuresPerExercise
+          : 0,
       beat: beatDouble.floor(),
       beatFraction: beatDouble - beatDouble.floor(),
       isCountIn: measure == 0,
@@ -73,7 +107,8 @@ class TimelineMap {
   /// count-in sound (spec §6).
   List<ClickEvent> clickEvents() {
     final events = <ClickEvent>[];
-    for (var m = 0; m < exerciseCount + 1; m++) {
+    final totalMeasures = exerciseCount * measuresPerExercise + 1;
+    for (var m = 0; m < totalMeasures; m++) {
       for (var b = 0; b < timeSignature.beats; b++) {
         events.add(ClickEvent(
           sampleOffset:
@@ -90,6 +125,13 @@ class TimelineMap {
 class TimelinePosition {
   /// 0-based exercise index; -1 during count-in.
   final int exercise;
+
+  /// Which of the current exercise's measures [beat] belongs to (0-based).
+  /// Always 0 for a single-measure exercise; design doc §23.
+  final int measureWithinExercise;
+
+  /// Beat WITHIN THE CURRENT MEASURE (0..timeSignature.beats-1) — NOT
+  /// cumulative across a multi-measure exercise, see [measureWithinExercise].
   final int beat;
 
   /// 0..1 progress within the current beat (drives the smooth playhead).
@@ -99,6 +141,7 @@ class TimelinePosition {
 
   const TimelinePosition({
     required this.exercise,
+    this.measureWithinExercise = 0,
     required this.beat,
     required this.beatFraction,
     required this.isCountIn,
@@ -107,7 +150,8 @@ class TimelinePosition {
 
   @override
   String toString() =>
-      'TimelinePosition(ex $exercise, beat $beat+${beatFraction.toStringAsFixed(3)}'
+      'TimelinePosition(ex $exercise, measure $measureWithinExercise, '
+      'beat $beat+${beatFraction.toStringAsFixed(3)}'
       '${isCountIn ? ', count-in' : ''}${isFinished ? ', finished' : ''})';
 }
 

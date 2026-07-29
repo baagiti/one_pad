@@ -17,6 +17,9 @@ import '../model/skill.dart';
 ///      is always satisfiable — no repair pass needed)
 ///   3. difficultyRamp biases free choices toward easier templates early
 ///
+/// [GenerationSpec.sessionFixed] levels skip this pipeline entirely: one
+/// template is picked once and repeated for all 16 exercises.
+///
 /// Review Pool injection (premium) hooks in between steps 1 and 2 in a later
 /// milestone: reserved slots are filled with review exercises first.
 class SessionGenerator {
@@ -40,12 +43,21 @@ class SessionGenerator {
     if (level.templates.isEmpty) {
       throw StateError('Level ${level.level} has an empty template pool');
     }
-    if (spec.noAdjacentRepeat && level.templates.length < 2) {
-      throw StateError(
-          'Level ${level.level}: noAdjacentRepeat requires at least 2 templates');
-    }
 
-    final sequence = _sequence(level.templates, spec, Session.exerciseCount);
+    final List<ExerciseTemplate> sequence;
+    if (spec.sessionFixed) {
+      // One pick for the whole session — varies session to session, never
+      // within one (design doc §17: Eighth Notes Level 5 needs this to be
+      // distinguishable from Level 6's forced per-measure switching).
+      final chosen = level.templates[_rng.nextInt(level.templates.length)];
+      sequence = List.filled(Session.exerciseCount, chosen);
+    } else {
+      if (spec.noAdjacentRepeat && level.templates.length < 2) {
+        throw StateError(
+            'Level ${level.level}: noAdjacentRepeat requires at least 2 templates');
+      }
+      sequence = _sequence(level.templates, spec, Session.exerciseCount);
+    }
 
     final createdAt = now ?? DateTime.now();
     return Session(
@@ -54,10 +66,11 @@ class SessionGenerator {
       skillId: skill.id,
       level: level.level,
       timeSignature: skill.timeSignature,
+      beatGroupPattern: skill.beatGroupPattern,
       bpm: bpm ?? skill.bpmDefault,
       exercises: [
         for (var i = 0; i < sequence.length; i++)
-          Exercise.fromTemplate(sequence[i], i),
+          Exercise.fromTemplate(sequence[i], i, skill.timeSignature),
       ],
     );
   }

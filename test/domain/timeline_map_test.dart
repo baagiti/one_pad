@@ -89,4 +89,57 @@ void main() {
     final expected = (odd.samplesPerBeat * (16 * 4 + 3)).round();
     expect(last, expected);
   });
+
+  group('measuresPerExercise = 2 (design doc §23, multi-measure rudiments)',
+      () {
+    final map2 = TimelineMap(
+      timeSignature: TimeSignature.fourFour,
+      bpm: 60,
+      sampleRate: 44100,
+      measuresPerExercise: 2,
+    );
+
+    test('total duration accounts for 2 measures per exercise', () {
+      // count-in (1) + 16 exercises * 2 measures = 33 measures.
+      expect(map2.totalSamples, 44100 * 4 * 33);
+    });
+
+    test('baseMeasureOfExercise skips 2 measures per prior exercise', () {
+      expect(map2.baseMeasureOfExercise(0), 1); // right after count-in
+      expect(map2.baseMeasureOfExercise(1), 3);
+      expect(map2.baseMeasureOfExercise(2), 5);
+    });
+
+    test('sampleOfBeat: measureWithinExercise selects the 2nd measure', () {
+      final firstMeasure = map2.sampleOfBeat(exercise: 0, beat: 0);
+      final secondMeasure =
+          map2.sampleOfBeat(exercise: 0, beat: 0, measureWithinExercise: 1);
+      expect(secondMeasure - firstMeasure, map2.samplesPerMeasure.round());
+    });
+
+    test('positionAt resolves both measures of one exercise to the SAME '
+        'exercise index, with measureWithinExercise distinguishing them',
+        () {
+      final firstMeasureStart =
+          map2.positionAt(map2.sampleOfBeat(exercise: 0, beat: 0));
+      final secondMeasureStart = map2.positionAt(
+          map2.sampleOfBeat(exercise: 0, beat: 0, measureWithinExercise: 1));
+      expect(firstMeasureStart.exercise, 0);
+      expect(firstMeasureStart.measureWithinExercise, 0);
+      expect(secondMeasureStart.exercise, 0);
+      expect(secondMeasureStart.measureWithinExercise, 1);
+
+      final nextExerciseStart = map2.positionAt(
+          map2.sampleOfBeat(exercise: 1, beat: 0));
+      expect(nextExerciseStart.exercise, 1);
+      expect(nextExerciseStart.measureWithinExercise, 0);
+    });
+
+    test('click events cover every measure of every exercise', () {
+      final clicks = map2.clickEvents();
+      // count-in (1) + 16*2 measures = 33 measures, 4 beats each.
+      expect(clicks, hasLength(33 * 4));
+      expect(clicks.where((c) => c.isMeasureStart), hasLength(33));
+    });
+  });
 }
