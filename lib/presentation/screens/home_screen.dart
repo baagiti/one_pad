@@ -4,6 +4,7 @@ import '../../application/session_flow/practice_flow_controller.dart';
 import '../../domain/model/skill.dart';
 import '../../domain/progress/access_policy.dart';
 import '../../domain/progress/progress_policy.dart';
+import '../../infrastructure/iap/purchase_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
 import '../widgets/drum_head_background.dart';
@@ -41,12 +42,14 @@ class HomeScreen extends StatefulWidget {
   final PracticeFlowController controller;
   final List<Skill> skills;
   final AppDatabase db;
+  final PurchaseService purchases;
 
   const HomeScreen({
     super.key,
     required this.controller,
     required this.skills,
     required this.db,
+    required this.purchases,
   });
 
   @override
@@ -210,7 +213,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _openPremiumScreen() {
     return Navigator.of(context).push(
-      MaterialPageRoute(builder: (_) => PremiumScreen(db: widget.db)),
+      MaterialPageRoute(
+        builder: (_) => PremiumScreen(db: widget.db, purchases: widget.purchases),
+      ),
     );
   }
 

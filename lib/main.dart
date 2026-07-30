@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart' show TargetPlatform, defaultTargetPlatform;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
@@ -7,6 +8,7 @@ import 'domain/model/skill.dart';
 import 'infrastructure/audio/audio_engine.dart';
 import 'infrastructure/audio/audio_recorder.dart';
 import 'infrastructure/audio/click_sounds.dart';
+import 'infrastructure/iap/purchase_service.dart';
 import 'infrastructure/storage/app_database.dart';
 import 'presentation/screens/home_screen.dart';
 import 'presentation/theme/app_theme.dart';
@@ -48,6 +50,7 @@ class _OnePadAppState extends State<OnePadApp> {
 
   late final PracticeFlowController _controller;
   late final AppDatabase _db;
+  late final PurchaseService _purchases;
   late final Future<List<Skill>> _bootstrap;
 
   @override
@@ -64,6 +67,14 @@ class _OnePadAppState extends State<OnePadApp> {
           level: session.level,
           bpm: session.bpm,
         );
+    _purchases = PurchaseService(db: _db);
+    // in_app_purchase only ships Android/iOS platform implementations —
+    // touching it on any other platform (Windows during dev testing) would
+    // throw, so it's only ever started here.
+    if (defaultTargetPlatform == TargetPlatform.iOS ||
+        defaultTargetPlatform == TargetPlatform.android) {
+      _purchases.listen();
+    }
     _bootstrap = _init();
   }
 
@@ -81,6 +92,7 @@ class _OnePadAppState extends State<OnePadApp> {
   @override
   void dispose() {
     _controller.dispose();
+    _purchases.dispose();
     _db.close();
     super.dispose();
   }
@@ -107,6 +119,7 @@ class _OnePadAppState extends State<OnePadApp> {
             controller: _controller,
             skills: snapshot.data!,
             db: _db,
+            purchases: _purchases,
           );
         },
       ),

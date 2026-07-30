@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../infrastructure/iap/purchase_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
 
@@ -12,10 +13,18 @@ import '../theme/app_theme.dart';
 /// — that's a server-side/App-Store-side conversion, not something this
 /// app computes itself, so there's no exchange-rate code to write here.
 /// `_subscribe` is a dev-only stand-in for that real flow.
+///
+/// Restore Purchases (2026-07-30) is wired to the real
+/// [PurchaseService.restorePurchases] — safe to ship before
+/// [PurchaseService.premiumProductId] exists in App Store Connect, since it
+/// just comes back empty until it does. It's wrapped in try/catch because
+/// the platform's IAP implementation isn't guaranteed present (e.g. this
+/// screen is still reachable on Windows during dev testing).
 class PremiumScreen extends StatelessWidget {
   final AppDatabase db;
+  final PurchaseService purchases;
 
-  const PremiumScreen({super.key, required this.db});
+  const PremiumScreen({super.key, required this.db, required this.purchases});
 
   static const _features = [
     (
@@ -66,6 +75,26 @@ class PremiumScreen extends StatelessWidget {
     if (confirmed != true) return;
     await db.setPremium(true);
     if (context.mounted) Navigator.of(context).pop();
+  }
+
+  Future<void> _restore(BuildContext context) async {
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      if (!await purchases.isAvailable()) {
+        messenger.showSnackBar(
+          const SnackBar(content: Text("Can't reach the App Store right now.")),
+        );
+        return;
+      }
+      await purchases.restorePurchases();
+      messenger.showSnackBar(
+        const SnackBar(content: Text('Checked for past purchases.')),
+      );
+    } catch (_) {
+      messenger.showSnackBar(
+        const SnackBar(content: Text("Couldn't restore purchases.")),
+      );
+    }
   }
 
   Future<void> _unsubscribe(BuildContext context) async {
@@ -195,6 +224,11 @@ class PremiumScreen extends StatelessWidget {
                 FilledButton(
                   onPressed: () => _subscribe(context),
                   child: const Text('Subscribe'),
+                ),
+                const SizedBox(height: 8),
+                OutlinedButton(
+                  onPressed: () => _restore(context),
+                  child: const Text('Restore Purchases'),
                 ),
               ] else
                 OutlinedButton(
