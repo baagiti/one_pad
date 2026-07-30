@@ -17,7 +17,7 @@ void main() {
     expect(skill.id, 'eighth_notes');
     expect(skill.bpmDefault, 60);
     expect(skill.bpmMin, 30);
-    expect(skill.bpmMax, 140);
+    expect(skill.bpmMax, 240);
   });
 
   test('has 8 levels: How to Count intro + 7 (no "free sticking reading" '

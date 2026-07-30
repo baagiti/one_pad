@@ -191,7 +191,7 @@ void main() {
     'name': 'Rudiments (Eighth Notes)',
     'timeSignature': '4/4',
     'bpmDefault': 60,
-    'bpmRange': [30, 140],
+    'bpmRange': [30, 240],
     'levels': [level1, level2, level3, level4],
   };
 

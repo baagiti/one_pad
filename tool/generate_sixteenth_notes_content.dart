@@ -300,7 +300,7 @@ void main() {
     'name': 'Sixteenth Notes',
     'timeSignature': '4/4',
     'bpmDefault': 50,
-    'bpmRange': [20, 100],
+    'bpmRange': [20, 240],
     'levels': [
       howToCountLevel(),
       {

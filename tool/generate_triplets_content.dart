@@ -224,7 +224,7 @@ void main() {
     'name': 'Triplets',
     'timeSignature': '4/4',
     'bpmDefault': 70,
-    'bpmRange': [30, 140],
+    'bpmRange': [30, 240],
     'levels': [howToCountLevel(), level1, level2, level3],
   };
 

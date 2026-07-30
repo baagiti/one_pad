@@ -17,7 +17,7 @@ void main() {
     expect(skill.id, 'quarter_note_rests');
     expect(skill.bpmDefault, 80);
     expect(skill.bpmMin, 30);
-    expect(skill.bpmMax, 180);
+    expect(skill.bpmMax, 240);
   });
 
   test('level pool sizes follow the rest-count axis (8/6/6/8), plus a How '

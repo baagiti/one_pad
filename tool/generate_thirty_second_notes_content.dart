@@ -104,7 +104,7 @@ void main() {
     'name': '32nd Notes',
     'timeSignature': '4/4',
     'bpmDefault': 25,
-    'bpmRange': [10, 50],
+    'bpmRange': [10, 240],
     'levels': [level1, level2],
   };
 

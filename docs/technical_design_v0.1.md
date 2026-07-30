@@ -272,6 +272,8 @@ test/               // domain %100 platformsuz test edilebilir
 - **Doğrulama:** `flutter analyze` temiz, 241 test yeşil (5 yeni: kayıt başlatma, doğal bitişte tek seferlik durdurma, `stop()` ile iptalde durdurma, düz practice'in recorder'a hiç dokunmaması + eski `recordingPath`'i temizlemesi, `generateSession`'ın temizlemesi). Windows'ta gerçek mikrofonla uçtan uca doğrulandı: kullanıcı Record → konuştu → Play Recording ile dinledi; diskte `OneDrive\Belgeler\recordings\paradiddle_eighth_notes_...wav` (~6 MB) oluştuğu ayrıca dosya sisteminden teyit edildi.
 - **Kapsam dışı (M4'e bırakıldı):** onset detection, FFT (`PCMFormat.f32le` gerektirir — şu an varsayılan `s16le`), skorlama, sonuç metrikleri.
 
+**DÜZELTME — ilk gerçek TestFlight dağıtımında bulunan çökme (2026-07-30).** `PracticeFlowController.init()` (uygulama açılışında, `main.dart`'tan çağrılıyor) o güne kadar hem `engine.init()` (flutter_soloud) hem `recorder.init()` (flutter_recorder) çağırıyordu. Bu, Windows'ta hiç sorun çıkarmadı (M3/M4 boyunca mikrofonla defalarca doğrulandı), ama gerçek iPhone'da her açılışta çöktü: `RecorderInitializeFailedException: ... already inited? (on the C++ side)`. Kök neden: iki paket AYNI native miniaudio kütüphanesini sarıyor; ikisini birlikte, uygulama açılışında eagerly initialize etmek gerçek donanımda çakıştı (Windows'un WASAPI backend'i muhtemelen ayrı context'lere izin verirken, iOS'un tekil `AVAudioSession` modeli izin vermiyor). **Düzeltme:** `recorder.init()` genel `init()`'ten kaldırılıp `startRecording()`'in başına taşındı (lazy init) — Record modu zaten Premium-only olduğu için çoğu seans hiç recorder'a dokunmuyor. GENEL DERS (M4'ün kalibrasyon dersiyle aynı ailede): Windows'ta ne kadar kapsamlı test edilirse edilsin, gerçek cihazın platforma özgü kısıtları (burada: paylaşılan native kütüphane + tekil audio session) sadece cihazda ortaya çıkabilir.
+
 ### 9.2 M4 İmplementasyonu — Analiz ve Skorlama (2026-07-27)
 
 **Onaylanan plan (uygulama öncesi):** eğitim-dostu skor bantları (Great ±40ms, Good ±80ms, Miss >150ms — araştırma: yarışmacı ritim oyunları ±15-50ms kullanıyor ama bu bir pratik aracı), minimal Results ekranı (tek genel skor, egzersiz-bazlı liste değil), kayıt başlangıcında "pedi cihaza yakın tut" uyarısı.
@@ -418,7 +420,9 @@ Müfredat dört bağımsız eksenin kesişiminden oluşuyor: **nota/ritim sözl�
 
 Planlanan skill sırası:
 
-1. **Quarter-Note Pulse** *(tamamlandı, Home'a bağlı)* — 4/4, dörtlük, sticking (bpmRange 30-180; sabit ramp yerine serbest BPM + pratik notu, 2026-07-27)
+**BPM tavanı — 2026-07-30 karar:** Bu bölümdeki (ve §16-29'daki) her skill'in `bpmRange` üst sınırı, o skill'in yazıldığı tarihte yoğunluğa göre ayrı ayrı belirlenmişti (ör. Quarter-Note Pulse 180, Sixteenth Notes 100, 32nd Notes 50). Uygulamayı finalize ederken kullanıcı **tüm skill'lerin üst sınırının, yoğunluğa bakılmaksızın düz 240'a çıkarılmasını** istedi (alt sınır ve `bpmDefault` değişmedi). Aşağıdaki ve §16-29'daki metinlerde geçen eski üst sınır sayıları (140, 100, 80, 50 vb.) artık GEÇERSİZ — gerçek değer her skill için 240'tır; metinler o kararın ARKASINDAKİ pedagojik gerekçeyi (o skill'in bpmDefault'unun neden o sayı olduğunu) hâlâ doğru anlatıyor, sadece üst sınır sayısı değişti. `content/skills/*.json` + `tool/generate_*.dart` (+ Performance Areas'ın 4 kümesi, hepsi artık `[30, 240]`) güncellendi, 295 test yeşil.
+
+1. **Quarter-Note Pulse** *(tamamlandı, Home'a bağlı)* — 4/4, dörtlük, sticking (bpmRange 30-240; sabit ramp yerine serbest BPM + pratik notu, 2026-07-27)
 2. **Quarter Note Rests** *(tamamlandı, Home'a bağlı, §16)* — nabzı korurken sus yerleştirme
 3. **Eighth Notes** *(tamamlandı, Home'a bağlı, §17)* — alt bölüm (subdivision) kavramı, yoğunluk ekseni + tam akış sticking alt-müfredatı
 4. **Eighth Notes + Rests** *(tamamlandı, Home'a bağlı, §18)* — offbeat/senkoplu "and" vuruşu

@@ -281,7 +281,7 @@ void main() {
     'name': 'Eighth Notes',
     'timeSignature': '4/4',
     'bpmDefault': 60,
-    'bpmRange': [30, 140],
+    'bpmRange': [30, 240],
     'levels': [
       howToCountLevel(),
       {

@@ -6,7 +6,7 @@
   "bpmDefault": 25,
   "bpmRange": [
     10,
-    50
+    240
   ],
   "levels": [
     {

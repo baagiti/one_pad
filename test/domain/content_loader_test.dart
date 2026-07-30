@@ -19,7 +19,7 @@ void main() {
     expect(skill.timeSignature, TimeSignature.fourFour);
     expect(skill.bpmDefault, 70);
     expect(skill.bpmMin, 30);
-    expect(skill.bpmMax, 180);
+    expect(skill.bpmMax, 240);
   });
 
   test('has 4 levels with expected pool sizes', () {

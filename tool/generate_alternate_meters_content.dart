@@ -314,7 +314,7 @@ void main() {
     'name': 'Alternate Meters',
     'timeSignature': '3/4',
     'bpmDefault': 80,
-    'bpmRange': [30, 180],
+    'bpmRange': [30, 240],
     'levels': [level1, level2],
   };
 
@@ -324,7 +324,7 @@ void main() {
     'name': 'Alternate Meters',
     'timeSignature': '6/8',
     'bpmDefault': 60,
-    'bpmRange': [30, 140],
+    'bpmRange': [30, 240],
     'levels': [
       howToCount68Level(),
       {...level3, 'level': 1},

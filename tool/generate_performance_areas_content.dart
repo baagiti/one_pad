@@ -82,7 +82,7 @@ void main() {
           'eighth_notes',
         ],
         bpmDefault: 60,
-        bpmRange: [30, 140],
+        bpmRange: [30, 240],
       ),
       'performance_foundations.json',
     ),
@@ -96,7 +96,7 @@ void main() {
           'syncopation_ties',
         ],
         bpmDefault: 60,
-        bpmRange: [30, 140],
+        bpmRange: [30, 240],
       ),
       'performance_syncopated_feel.json',
     ),
@@ -109,12 +109,19 @@ void main() {
           'triplets',
           // 2026-07-27: added alongside its own new skill (32nd Notes) —
           // same hand-speed-tier family as sixteenth notes/triplets, same
-          // 4/4 time signature. bpmRange narrows to the 3-way intersection
-          // ([20,100] ∩ [30,140] ∩ [10,50]); default drops to match.
+          // 4/4 time signature.
+          //
+          // 2026-07-30: every skill's bpmRange ceiling was raised to a flat
+          // 240 (user decision — finalizing the app). The 3-way intersection
+          // of the component skills' ceilings is now 240 for every cluster
+          // here, so this cluster's own ceiling is 240 too; only the floor
+          // (30, the max of the components' floors) still differs cluster
+          // to cluster. Default stays low — 32nd notes are still only
+          // realistically playable slow.
           'thirty_second_notes',
         ],
         bpmDefault: 30,
-        bpmRange: [30, 50],
+        bpmRange: [30, 240],
       ),
       'performance_fast_subdivision.json',
     ),
@@ -128,7 +135,7 @@ void main() {
           'roll_rudiments',
         ],
         bpmDefault: 35,
-        bpmRange: [30, 80],
+        bpmRange: [30, 240],
       ),
       'performance_rudiment_workout.json',
     ),

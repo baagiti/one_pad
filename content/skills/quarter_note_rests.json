@@ -4,7 +4,7 @@
   "name": "Quarter Note Rests",
   "timeSignature": "4/4",
   "bpmDefault": 80,
-  "bpmRange": [30, 180],
+  "bpmRange": [30, 240],
   "levels": [
     {
       "level": 0,

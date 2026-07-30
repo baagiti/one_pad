@@ -200,7 +200,7 @@ void main() {
     'name': 'Odd Meters',
     'timeSignature': '5/4',
     'bpmDefault': 80,
-    'bpmRange': [30, 180],
+    'bpmRange': [30, 240],
     'levels': [level1_54, level2_54],
   };
 
@@ -211,7 +211,7 @@ void main() {
     'timeSignature': '7/8',
     'beatGroupPattern': [2, 2, 3],
     'bpmDefault': 60,
-    'bpmRange': [30, 140],
+    'bpmRange': [30, 240],
     'levels': [howToCount78Level(), level1_78, level2_78],
   };
 

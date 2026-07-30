@@ -161,7 +161,7 @@ void main() {
     'name': 'Syncopation / Ties',
     'timeSignature': '4/4',
     'bpmDefault': 60,
-    'bpmRange': [30, 140],
+    'bpmRange': [30, 240],
     'levels': [level1, level2, level3],
   };
 

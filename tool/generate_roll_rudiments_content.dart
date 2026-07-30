@@ -152,7 +152,7 @@ void main() {
     'name': 'Rudiments: Roll Family',
     'timeSignature': '4/4',
     'bpmDefault': 60,
-    'bpmRange': [30, 120],
+    'bpmRange': [30, 240],
     'levels': [level1, level2, level3, level4],
   };
 

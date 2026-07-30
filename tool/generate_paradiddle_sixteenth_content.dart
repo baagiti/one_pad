@@ -142,7 +142,7 @@ void main() {
     'name': 'Rudiments (Sixteenth Notes)',
     'timeSignature': '4/4',
     'bpmDefault': 35,
-    'bpmRange': [20, 80],
+    'bpmRange': [20, 240],
     'levels': [level1, level2, level3],
   };
 

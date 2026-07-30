@@ -18,7 +18,7 @@ void main() {
     expect(skill.name, '32nd Notes');
     expect(skill.bpmDefault, 25);
     expect(skill.bpmMin, 10);
-    expect(skill.bpmMax, 50);
+    expect(skill.bpmMax, 240);
   });
 
   test('has 2 levels: isolate the new sound, then a full steady-stream '
