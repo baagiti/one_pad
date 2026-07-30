@@ -342,10 +342,17 @@ M4 doğrulaması sırasında kullanıcı, Quarter-Note Pulse/Eighth Notes/Sixtee
 
 ### Yeni açık konular (2026-07-27, premium ekranı sonrası)
 
-12. **Restore Purchases** — Premium ekranında yok. Kullanıcı cihaz değiştirdiğinde/uygulamayı silip yüklediğinde aboneliğini geri alabilmesi gerekiyor; StoreKit entegrasyonuyla birlikte eklenmeli.
-13. **Abonelik durumu/süre takibi** — Şu anki `PremiumSettings.isPremium` kalıcı bir açık/kapalı bayrak (bkz. §32). Gerçek bir otomatik yenilenen abonelikte süre dolabilir/yenilenebilir/iptal edilebilir — StoreKit'ten durumun periyodik/launch-time kontrolü gerekir, tek seferlik local bool yeterli değil.
+12. ~~**Restore Purchases**~~ **KAPANDI — 2026-07-30.** `lib/infrastructure/iap/purchase_service.dart` (`PurchaseService`, `in_app_purchase` paketi) gerçek `restorePurchases()`'a bağlandı, Premium ekranında buton var. `premiumProductId` henüz App Store Connect'te yok (madde 15), o yüzden şimdilik hep "hiçbir şey bulunamadı" dönecek — ama kod/akış hazır, ürün oluşturulunca otomatik çalışacak. `in_app_purchase`'ın Windows implementasyonu yok; `main.dart` sadece iOS/Android'de dinlemeye başlıyor, Windows build'i bozmadığı doğrulandı.
+13. **Abonelik durumu/süre takibi** — Şu anki `PremiumSettings.isPremium` kalıcı bir açık/kapalı bayrak (bkz. §32). Gerçek bir otomatik yenilenen abonelikte süre dolabilir/yenilenebilir/iptal edilebilir — `PurchaseService`'in purchase stream dinleyicisi `purchased`/`restored` durumunda `setPremium(true)` çağırıyor ama `expired`/iptal durumunu henüz `setPremium(false)`'a bağlamıyor (StoreKit bu durumları farklı bir sinyalle iletir, henüz işlenmedi). *(hâlâ kısmen açık)*
 14. **Apple'ın zorunlu abonelik metni** — Otomatik yenilenen abonelikler için "Subscribe" butonunun yakınında fiyat/süre/otomatik yenileme uyarısı + Kullanım Şartları/Gizlilik Politikası linki gösterilmesi App Store kurallarının bir parçası; `premium_screen.dart`'a henüz eklenmedi.
-15. Premium fiyatı $4.99/ay olarak UI'da sabit yazılı (`premium_screen.dart`) — gerçek App Store Connect ürün/fiyat tier kurulumu henüz yapılmadı (Apple Developer hesabı gerektiriyor, kod yazmakla bitmiyor). Kurulunca Apple, bu USD tier'ın her storefront'taki yerel para birimi karşılığını KENDİSİ hesaplayıp gösterir — uygulama tarafında döviz kuru kodu YAZILMAYACAK.
+15. Premium fiyatı $4.99/ay olarak UI'da sabit yazılı (`premium_screen.dart`) — gerçek App Store Connect ürün/fiyat tier kurulumu henüz yapılmadı (Apple Developer hesabı gerektiriyor, kod yazmakla bitmiyor). Kurulunca Apple, bu USD tier'ın her storefront'taki yerel para birimi karşılığını KENDİSİ hesaplayıp gösterir — uygulama tarafında döviz kuru kodu YAZILMAYACAK. `PurchaseService.premiumProductId` (`com.burakakkaya.onePad.premium_monthly`) ASC'de oluşturulacak gerçek ürün ID'siyle BİREBİR eşleşmeli.
+
+### Yeni açık konular (2026-07-30, "hazır mıyız?" denetimi)
+
+16. **App icon hâlâ Flutter'ın varsayılan mavi logosu** (`ios/Runner/Assets.xcassets/AppIcon.appiconset/*.png`) — App Store'a bu haliyle gönderilebilir ama telefonun ana ekranında/App Store sayfasında amatörce durur. Gerçek bir "Stick Trainer" ikonu tasarlanıp tüm boyutlarda (20-1024px) yerleştirilmeli.
+17. **Launch screen de muhtemelen varsayılan** (`ios/Runner/Assets.xcassets/LaunchImage.imageset/` — klasörde hâlâ Flutter'ın kendi `README.md`'si duruyor, hiç dokunulmamış izlenimi veriyor). Küçük bir kozmetik eksik, App Store'u engellemez ama ilk açılış hissini zayıflatır.
+18. **`PrivacyInfo.xcprivacy` (gizlilik manifestosu) yok** — Apple, Mayıs 2024'ten beri belirli "required reason API"leri kullanan uygulamalardan bunu istiyor; mikrofon kullanan bu uygulama için gerekip gerekmediği netleştirilmeli (App Store Connect submission sırasında Apple'ın kendisi eksikse uyarıyor/reddediyor).
+19. **App Store Connect metadata** (kod dışı, doğrudan kontrol edemediğim alan): ekran görüntüleri, açıklama metni, gizlilik politikası URL'si (mikrofon kaydı topladığı için muhtemelen ZORUNLU), App Privacy veri toplama beyanı, yaş derecelendirmesi — hiçbiri bu oturumda kontrol edilmedi, App Store Connect'te elle doğrulanmalı.
 
 ---
 
