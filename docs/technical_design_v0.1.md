@@ -976,9 +976,20 @@ Kullanıcı isteği: seçilen dersi baştan sona bitince otomatik tekrar başlat
 
 **Rozet sayımı kararı (kullanıcı, 2026-07-30):** İlk tasarımda loop turları `onSessionCompleted`'ı tetiklemiyordu (rozet sayacını şişirmesin diye) — kullanıcı bunu tersine çevirdi: "rozet işini saysın, her loop sayılsın." Şimdi her tamamlanan loop turu da normal bir seans gibi `onSessionCompleted`'ı tetikliyor.
 
-**UI:** `SessionPreviewScreen`, `ResultsScreen`'deki gibi tek seferlik `db.isPremium()` okumasıyla kendi `_premium` durumunu tutuyor; "Reference hits" switch'inin altında, sadece Premium'da görünen bir "Loop" `SwitchListTile`'ı var (premium rozet ikonuyla).
+**UI:** `SessionPreviewScreen`, `ResultsScreen`'deki gibi tek seferlik `db.isPremium()` okumasıyla kendi `_premium` durumunu tutuyor; "Reference hits" switch'inin altında bir "Loop" `SwitchListTile`'ı var (premium rozet ikonuyla).
 
 **Doğrulama notu:** İlk elden test denemesinde loop çalışmadı gibi göründü (sonuç ekranına düştü) — kök neden koddan değil, muhtemelen kesilmiş/eski bir `flutter run` process'ine karşı test edilmiş olmasından kaynaklandı (önceki smoke-test komutları `timeout 90` ile otomatik kesiliyordu). Zaman aşımı olmadan taze bir `flutter run -d windows` başlatılıp yeniden denendiğinde loop doğru çalıştı — kullanıcı onayladı ("tamam şimdi oldu").
+
+### TestFlight geri bildirimi sonrası düzeltmeler (2026-07-30, gerçek cihaz)
+
+Gerçek TestFlight build'i test edilince iki bulgu geldi:
+
+1. **"Preview" butonu metni satır kırıyordu** ("Previe" / "w") — `Row`'daki flex oranı (1:2, Begin lehine) dar cihaz/büyük yazı tipi ayarında "Preview" etiketine yetmiyordu. Düzeltme: `Text` etiketine `maxLines: 1, overflow: TextOverflow.ellipsis` eklendi (satır kırmak yerine gerekirse üç nokta ile kısaltır).
+2. **Loop switch'i Premium açılana kadar hiç görünmüyordu** — kullanıcı bunun bir bug olmadığını (gating doğru çalıştığını) doğruladı, ama görünürlük kararını değiştirdi: **"herkese görünmeli, sadece premium açabilmeli"** — diğer kilitli-ama-görünür UI elemanlarıyla (roadmap'teki kilitli dersler gibi) tutarlı olsun diye. `if (_premium)` sarmalayıcısı kaldırıldı; switch artık her zaman görünüyor, `value: _premium && controller.loopPractice`, `onChanged`'da premium değilse `_showPremiumUpsell(...)` (Home'daki "Go Premium" diyaloğuyla birebir aynı desen) açılıp gerçek toggle atlanıyor.
+
+Bu ikinci bulgu, ayrıca **Record + analiz'in hiç premium gate'lenmediği** gerçek bir eksiği ortaya çıkardı (kullanıcının kendi sorusu: "Record ve analiz tabii ki premium... premium moduna geçmeden önce de kayıt tuşunu gördüm"). §11 tablosunda hep "Free: ✗, Premium: ✓" yazıyordu ama kodda hiçbir kontrol yoktu. Kullanıcının kararı: **"herkese görünsün ama sadece premium sahipleri basabilsin"** — Loop ile aynı görünür-ama-kilitli desen. `_beginRecording()`'in başına `if (!_premium) { _showPremiumUpsell(...); return; }` eklendi; Record butonunun kendisi hâlâ herkese görünüyor ve tıklanabilir, sadece gerçek eylem (kayıt başlatma) Premium'a bağlandı.
+
+Bu üçüncü upsell noktası (`_showPremiumUpsell`, Home'dakiyle aynı "Maybe later"/"Go Premium" diyaloğu) `SessionPreviewScreen`'e eklendiği için, oraya artık `PremiumScreen`'i açabilmek adına `purchases: PurchaseService` de constructor parametresi olarak taşınıyor — zincir bir adım daha uzadı: `HomeScreen`/`TodaySessionScreen` → `SessionPreviewScreen` artık hem `ads` hem `purchases` geçiriyor.
 
 ---
 

@@ -4,6 +4,7 @@ import '../../application/session_flow/practice_flow_controller.dart';
 import '../../domain/model/skill.dart';
 import '../../domain/progress/access_policy.dart';
 import '../../infrastructure/ads/ads_service.dart';
+import '../../infrastructure/iap/purchase_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
 import '../widgets/ad_banner.dart';
@@ -23,6 +24,7 @@ class TodaySessionScreen extends StatelessWidget {
   final AppDatabase db;
   final List<Skill> skills;
   final AdsService ads;
+  final PurchaseService purchases;
 
   const TodaySessionScreen({
     super.key,
@@ -30,6 +32,7 @@ class TodaySessionScreen extends StatelessWidget {
     required this.db,
     required this.skills,
     required this.ads,
+    required this.purchases,
   });
 
   Future<void> _open(BuildContext context, Skill skill, int level, int bpm) async {
@@ -40,6 +43,7 @@ class TodaySessionScreen extends StatelessWidget {
           controller: controller,
           db: db,
           ads: ads,
+          purchases: purchases,
           levelNote: skill.level(level).note,
         ),
       ),

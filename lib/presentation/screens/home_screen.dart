@@ -198,6 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: widget.controller,
           db: widget.db,
           ads: widget.ads,
+          purchases: widget.purchases,
           levelNote: skill.level(levelNumber).note,
         ),
       ),
@@ -243,6 +244,7 @@ class _HomeScreenState extends State<HomeScreen> {
           db: widget.db,
           skills: widget.skills,
           ads: widget.ads,
+          purchases: widget.purchases,
         ),
       ),
     );

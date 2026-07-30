@@ -6,11 +6,13 @@ import '../../application/tempo/tap_tempo_calculator.dart';
 import '../../domain/timeline/timeline_map.dart';
 import '../../infrastructure/ads/ads_service.dart';
 import '../../infrastructure/audio/recording_paths.dart';
+import '../../infrastructure/iap/purchase_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../notation/notation_view.dart';
 import '../theme/app_theme.dart';
 import '../widgets/drum_head_background.dart';
 import 'practice_screen.dart';
+import 'premium_screen.dart';
 
 /// Session Preview (spec §5): listen to the generated session with metronome
 /// and optional reference pad hits. Never recorded or analyzed.
@@ -18,6 +20,7 @@ class SessionPreviewScreen extends StatefulWidget {
   final PracticeFlowController controller;
   final AppDatabase db;
   final AdsService ads;
+  final PurchaseService purchases;
 
   /// This level's practice tip (`Level.note`), if it has one — shown as a
   /// small hint above the action buttons.
@@ -28,6 +31,7 @@ class SessionPreviewScreen extends StatefulWidget {
     required this.controller,
     required this.db,
     required this.ads,
+    required this.purchases,
     this.levelNote,
   });
 
@@ -96,7 +100,43 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
     );
   }
 
+  Future<void> _showPremiumUpsell(String message) async {
+    await showDialog<void>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('Go Premium'),
+        content: Text(message),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Maybe later'),
+          ),
+          FilledButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (_) => PremiumScreen(
+                    db: widget.db,
+                    purchases: widget.purchases,
+                  ),
+                ),
+              );
+            },
+            child: const Text('Go Premium'),
+          ),
+        ],
+      ),
+    );
+  }
+
   Future<void> _beginRecording() async {
+    if (!_premium) {
+      _showPremiumUpsell(
+        'Recording and timing analysis is a Premium feature.',
+      );
+      return;
+    }
     _ticker.stop();
     await controller.stop();
 
@@ -164,21 +204,31 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
                       ? null
                       : (v) => setState(() => controller.referenceHits = v),
                 ),
-                if (_premium)
-                  SwitchListTile(
-                    title: const Text('Loop'),
-                    subtitle: const Text(
-                      'Repeat this lesson with a fresh count-in each time',
-                    ),
-                    secondary: const Icon(
-                      Icons.workspace_premium_outlined,
-                      color: AppColors.secondary,
-                    ),
-                    value: controller.loopPractice,
-                    onChanged: previewing
-                        ? null
-                        : (v) => setState(() => controller.loopPractice = v),
+                SwitchListTile(
+                  title: const Text('Loop'),
+                  subtitle: Text(
+                    _premium
+                        ? 'Repeat this lesson with a fresh count-in each time'
+                        : 'Premium feature — go Premium to unlock',
                   ),
+                  secondary: const Icon(
+                    Icons.workspace_premium_outlined,
+                    color: AppColors.secondary,
+                  ),
+                  value: _premium && controller.loopPractice,
+                  onChanged: previewing
+                      ? null
+                      : (v) {
+                          if (!_premium) {
+                            _showPremiumUpsell(
+                              'Looping a lesson automatically is a Premium '
+                              'feature.',
+                            );
+                            return;
+                          }
+                          setState(() => controller.loopPractice = v);
+                        },
+                ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
@@ -186,7 +236,11 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
                       child: OutlinedButton.icon(
                         onPressed: _togglePreview,
                         icon: Icon(previewing ? Icons.stop : Icons.hearing),
-                        label: Text(previewing ? 'Stop' : 'Preview'),
+                        label: Text(
+                          previewing ? 'Stop' : 'Preview',
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
                     ),
                     const SizedBox(width: 12),
