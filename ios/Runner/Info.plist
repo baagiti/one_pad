@@ -24,10 +24,14 @@
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3940256099942544~1458002511</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Stick Trainer records your playing on the pad so it can be played back after a practice session.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>This identifier helps show you ads relevant to you, and supports the free version of Stick Trainer.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

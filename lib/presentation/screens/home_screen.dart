@@ -4,9 +4,11 @@ import '../../application/session_flow/practice_flow_controller.dart';
 import '../../domain/model/skill.dart';
 import '../../domain/progress/access_policy.dart';
 import '../../domain/progress/progress_policy.dart';
+import '../../infrastructure/ads/ads_service.dart';
 import '../../infrastructure/iap/purchase_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
+import '../widgets/ad_banner.dart';
 import '../widgets/drum_head_background.dart';
 import 'premium_screen.dart';
 import 'session_preview_screen.dart';
@@ -43,6 +45,7 @@ class HomeScreen extends StatefulWidget {
   final List<Skill> skills;
   final AppDatabase db;
   final PurchaseService purchases;
+  final AdsService ads;
 
   const HomeScreen({
     super.key,
@@ -50,6 +53,7 @@ class HomeScreen extends StatefulWidget {
     required this.skills,
     required this.db,
     required this.purchases,
+    required this.ads,
   });
 
   @override
@@ -135,12 +139,14 @@ class _HomeScreenState extends State<HomeScreen> {
         : await widget.db
             .isUnlockedToday(skillId: skill.id, level: levelNumber);
     final todayCount = premium ? 0 : await widget.db.todayUnlockCount();
+    final bonusSlots = premium ? 0 : await widget.db.todayBonusSlots();
 
     final decision = decideGate(
       premium: premium,
       skillId: skill.id,
       alreadyUnlockedToday: alreadyUnlocked,
       todayUnlockCount: todayCount,
+      bonusSlotsToday: bonusSlots,
     );
 
     switch (decision) {
@@ -149,9 +155,18 @@ class _HomeScreenState extends State<HomeScreen> {
         return;
       case GateDecision.upsellCapReached:
         if (mounted) {
+          final effectiveCap = freeDailySessionCap +
+              bonusSlots.clamp(0, freeBonusSlotCap);
+          // Only dangle the ad option if today's one bonus slot (design
+          // doc, 2026-07-30) hasn't already been spent — otherwise this
+          // dialog would offer a video that isn't actually available until
+          // tomorrow.
+          final adHint = bonusSlots < freeBonusSlotCap
+              ? "Watch a video on the Today's Session screen for one more, "
+                  'come back tomorrow, or go Premium for unlimited practice.'
+              : 'Come back tomorrow, or go Premium for unlimited practice.';
           _showPremiumUpsell(
-            "You've used today's $freeDailySessionCap free lessons. "
-            'Come back tomorrow, or go Premium for unlimited practice.',
+            "You've used today's $effectiveCap free lessons. $adHint",
           );
         }
         return;
@@ -182,6 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
         builder: (_) => SessionPreviewScreen(
           controller: widget.controller,
           db: widget.db,
+          ads: widget.ads,
           levelNote: skill.level(levelNumber).note,
         ),
       ),
@@ -226,6 +242,7 @@ class _HomeScreenState extends State<HomeScreen> {
           controller: widget.controller,
           db: widget.db,
           skills: widget.skills,
+          ads: widget.ads,
         ),
       ),
     );
@@ -256,6 +273,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       _buildRoadmapEntry(context, i + 1, _roadmap[i], premium),
                     const SizedBox(height: 12),
                     _buildPremiumCard(context, premium),
+                    if (!premium) ...[
+                      const SizedBox(height: 20),
+                      Center(child: AdBanner(ads: widget.ads)),
+                    ],
                   ],
                 ),
               ),

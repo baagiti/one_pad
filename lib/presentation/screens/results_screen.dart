@@ -9,9 +9,11 @@ import '../../domain/analysis/expected_onsets.dart';
 import '../../domain/analysis/latency_search.dart';
 import '../../domain/analysis/onset_detector.dart';
 import '../../domain/analysis/timing_scorer.dart';
+import '../../infrastructure/ads/ads_service.dart';
 import '../../infrastructure/audio/wav_codec.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
+import '../widgets/ad_banner.dart';
 import '../widgets/drum_head_background.dart';
 import 'practice_screen.dart';
 
@@ -26,8 +28,14 @@ import 'practice_screen.dart';
 class ResultsScreen extends StatefulWidget {
   final PracticeFlowController controller;
   final AppDatabase db;
+  final AdsService ads;
 
-  const ResultsScreen({super.key, required this.controller, required this.db});
+  const ResultsScreen({
+    super.key,
+    required this.controller,
+    required this.db,
+    required this.ads,
+  });
 
   @override
   State<ResultsScreen> createState() => _ResultsScreenState();
@@ -42,11 +50,28 @@ class _ResultsScreenState extends State<ResultsScreen> {
 
   bool _analyzing = false;
   SessionScore? _score;
+  bool _premium = false;
 
   @override
   void initState() {
     super.initState();
     if (controller.recordingPath != null) _analyze();
+    _checkPremiumAndShowAd();
+  }
+
+  /// Post-session interstitial for free users only (design doc, 2026-07-30)
+  /// — fire-and-forget, an ad is a bonus screen, never something the results
+  /// UI waits on. Deferred to after the first frame so it never contends
+  /// with this screen's own build/analysis.
+  Future<void> _checkPremiumAndShowAd() async {
+    final premium = await widget.db.isPremium();
+    if (!mounted) return;
+    setState(() => _premium = premium);
+    if (!premium) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        widget.ads.showInterstitial();
+      });
+    }
   }
 
   Future<void> _analyze() async {
@@ -193,6 +218,7 @@ class _ResultsScreenState extends State<ResultsScreen> {
                             builder: (_) => PracticeScreen(
                               controller: controller,
                               db: widget.db,
+                              ads: widget.ads,
                             ),
                           ),
                         );
@@ -207,6 +233,10 @@ class _ResultsScreenState extends State<ResultsScreen> {
                       icon: const Icon(Icons.home_outlined),
                       label: const Text('Home'),
                     ),
+                    if (!_premium) ...[
+                      const SizedBox(height: 16),
+                      AdBanner(ads: widget.ads),
+                    ],
                   ],
                 ),
               ),

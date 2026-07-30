@@ -14,6 +14,12 @@ const freeDailySessionCap = 3;
 
 const freeBpm = 60;
 
+/// A free user can watch one rewarded ad per day for exactly one bonus
+/// session slot on top of [freeDailySessionCap] (2026-07-30 decision) —
+/// capped at +1/day, not stackable, so it's a small nudge rather than a way
+/// to fully route around the daily cap.
+const freeBonusSlotCap = 1;
+
 bool isSkillFree(String skillId) => freeSkillIds.contains(skillId);
 
 /// What tapping into (skillId, level) should do for the current user —
@@ -28,10 +34,13 @@ GateDecision decideGate({
   required String skillId,
   required bool alreadyUnlockedToday,
   required int todayUnlockCount,
+  int bonusSlotsToday = 0,
 }) {
   if (premium) return GateDecision.allow;
   if (!isSkillFree(skillId)) return GateDecision.upsellLocked;
-  if (!alreadyUnlockedToday && todayUnlockCount >= freeDailySessionCap) {
+  final effectiveCap =
+      freeDailySessionCap + bonusSlotsToday.clamp(0, freeBonusSlotCap);
+  if (!alreadyUnlockedToday && todayUnlockCount >= effectiveCap) {
     return GateDecision.upsellCapReached;
   }
   return GateDecision.allow;

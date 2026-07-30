@@ -118,6 +118,31 @@ void main() {
     });
   });
 
+  group('ad bonus slots (2026-07-30, rewarded-ad daily bonus slot)', () {
+    test('starts at zero on a fresh day', () async {
+      expect(await db.todayBonusSlots(), 0);
+      expect(await db.watchTodayBonusSlots().first, 0);
+    });
+
+    test('addBonusSlot increments the count and the stream', () async {
+      final stream = db.watchTodayBonusSlots();
+      final values = <int>[];
+      final sub = stream.listen(values.add);
+      await Future.delayed(Duration.zero);
+
+      await db.addBonusSlot();
+      await Future.delayed(Duration.zero);
+      expect(await db.todayBonusSlots(), 1);
+
+      await db.addBonusSlot();
+      await Future.delayed(Duration.zero);
+      expect(await db.todayBonusSlots(), 2);
+
+      await sub.cancel();
+      expect(values, [0, 1, 2]);
+    });
+  });
+
   group('recent practiced (2026-07-27, Premium\'s Today\'s Session list)',
       () {
     test('empty with no completed sessions', () async {

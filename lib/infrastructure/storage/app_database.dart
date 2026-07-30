@@ -42,14 +42,26 @@ class PremiumSettings extends Table {
   BoolColumn get isPremium => boolean().withDefault(const Constant(false))();
 }
 
-@DriftDatabase(tables: [PracticeSessions, DailyUnlocks, PremiumSettings])
+/// One row per day a free-tier user has watched a rewarded ad for a bonus
+/// session slot (design doc, 2026-07-30) — [count] is checked against
+/// [freeBonusSlotCap] in access_policy.dart rather than enforced here, so
+/// the cap stays in one place.
+class AdBonusSlots extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get dateKey => text()();
+  IntColumn get count => integer().withDefault(const Constant(0))();
+}
+
+@DriftDatabase(
+  tables: [PracticeSessions, DailyUnlocks, PremiumSettings, AdBonusSlots],
+)
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   AppDatabase.forTesting(super.executor);
 
   @override
-  int get schemaVersion => 4;
+  int get schemaVersion => 5;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -67,6 +79,10 @@ class AppDatabase extends _$AppDatabase {
           if (from < 4) {
             await m.createTable(dailyUnlocks);
             await m.createTable(premiumSettings);
+          }
+          // v5 added the rewarded-ad bonus slot table (2026-07-30).
+          if (from < 5) {
+            await m.createTable(adBonusSlots);
           }
         },
       );
@@ -124,6 +140,34 @@ class AppDatabase extends _$AppDatabase {
       skillId: skillId,
       level: level,
     ));
+  }
+
+  Future<int> todayBonusSlots() async {
+    final query = select(adBonusSlots)
+      ..where((t) => t.dateKey.equals(_todayKey()));
+    final row = await query.getSingleOrNull();
+    return row?.count ?? 0;
+  }
+
+  Stream<int> watchTodayBonusSlots() {
+    final query = select(adBonusSlots)
+      ..where((t) => t.dateKey.equals(_todayKey()));
+    return query.watchSingleOrNull().map((row) => row?.count ?? 0);
+  }
+
+  Future<void> addBonusSlot() async {
+    final today = _todayKey();
+    final existing = await (select(adBonusSlots)
+          ..where((t) => t.dateKey.equals(today)))
+        .getSingleOrNull();
+    if (existing == null) {
+      await into(adBonusSlots).insert(
+        AdBonusSlotsCompanion.insert(dateKey: today, count: const Value(1)),
+      );
+    } else {
+      await (update(adBonusSlots)..where((t) => t.id.equals(existing.id)))
+          .write(AdBonusSlotsCompanion(count: Value(existing.count + 1)));
+    }
   }
 
   /// Today's unlocked (skillId, level) pairs — backs the Home screen's

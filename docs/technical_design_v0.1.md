@@ -314,6 +314,9 @@ M4 doğrulaması sırasında kullanıcı, Quarter-Note Pulse/Eighth Notes/Sixtee
 | BPM değiştirme (canlı, +/-/Tap Tempo) | ✓ (kısıtlanmadı) | ✓ |
 | Kayıt + analiz (M3/M4) | ✗ | ✓ |
 | Review önerileri (M5, henüz yok) | ✗ | ✓ |
+| Reklamlar (banner + interstitial) | ✓ (görür) | ✗ (hiç görmez) |
+| Rewarded ad ile +1 bonus seans (günde 1 kez) | ✓ | — (gerekmez, sınır yok) |
+| Loop (dersi otomatik tekrar başlatma) | ✗ | ✓ |
 
 "Takvim günü" = cihaz yerel saati (`AppDatabase._todayKey()`, `'YYYY-MM-DD'` string — saat dilimi/DateTime karşılaştırma sorunlarını komple es geçiyor).
 
@@ -349,10 +352,16 @@ M4 doğrulaması sırasında kullanıcı, Quarter-Note Pulse/Eighth Notes/Sixtee
 
 ### Yeni açık konular (2026-07-30, "hazır mıyız?" denetimi)
 
-16. **App icon hâlâ Flutter'ın varsayılan mavi logosu** (`ios/Runner/Assets.xcassets/AppIcon.appiconset/*.png`) — App Store'a bu haliyle gönderilebilir ama telefonun ana ekranında/App Store sayfasında amatörce durur. Gerçek bir "Stick Trainer" ikonu tasarlanıp tüm boyutlarda (20-1024px) yerleştirilmeli.
+16. ~~**App icon hâlâ Flutter'ın varsayılan mavi logosu**~~ **KAPANDI — 2026-07-30.** Kullanıcı Gemini ile ikon konsepti üretti (davul + baget, "Sunset Coral" turuncusu); Gemini çıktısındaki sabit bir sparkle/yıldız artefaktı (her iki denemede de aynı köşede) renk-eşleştirmeli bir yama ile temizlendi, 1024×1024 master'dan tüm 15 iOS boyutu (`ios/Runner/Assets.xcassets/AppIcon.appiconset/`) üretildi. RGB, alfa kanalsız, tam kare — Apple'ın gereksinimleri karşılanıyor.
 17. **Launch screen de muhtemelen varsayılan** (`ios/Runner/Assets.xcassets/LaunchImage.imageset/` — klasörde hâlâ Flutter'ın kendi `README.md`'si duruyor, hiç dokunulmamış izlenimi veriyor). Küçük bir kozmetik eksik, App Store'u engellemez ama ilk açılış hissini zayıflatır.
 18. **`PrivacyInfo.xcprivacy` (gizlilik manifestosu) yok** — Apple, Mayıs 2024'ten beri belirli "required reason API"leri kullanan uygulamalardan bunu istiyor; mikrofon kullanan bu uygulama için gerekip gerekmediği netleştirilmeli (App Store Connect submission sırasında Apple'ın kendisi eksikse uyarıyor/reddediyor).
 19. **App Store Connect metadata** (kod dışı, doğrudan kontrol edemediğim alan): ekran görüntüleri, açıklama metni, gizlilik politikası URL'si (mikrofon kaydı topladığı için muhtemelen ZORUNLU), App Privacy veri toplama beyanı, yaş derecelendirmesi — hiçbiri bu oturumda kontrol edilmedi, App Store Connect'te elle doğrulanmalı.
+
+### Yeni açık konular (2026-07-30, reklam entegrasyonu sonrası)
+
+20. ~~**RevenueCat gerekli mi?**~~ **KAPANDI (karar: hayır).** Tek platform (iOS) + `PurchaseService`'in kendi receipt/restore mantığı zaten yazılı olduğu için RevenueCat'in kazandıracağı şey (çapraz platform entitlement + üçüncü taraf servis bağımlılığı) şu an gerekmiyor. Aylık/yıllık ikinci bir ürün eklemek gerçek StoreKit ile de mümkün: ASC'de aynı subscription group'a ikinci ürün + `PurchaseService`'e ikinci bir product ID yeterli.
+21. **Gerçek AdMob hesabı/ID'leri yok.** `AdsService`, `ios/Runner/Info.plist`'teki `GADApplicationIdentifier` ve tüm ad unit ID'leri şu an Google'ın herkese açık *test* ID'leri (§33) — her zaman dolar, hiç gerçek gelir üretmez. Gerçek AdMob hesabı açılıp gerçek ID'lerle değiştirilmeden App Store'a gitmemeli.
+22. **Reklam sıklığı/UX ince ayarı henüz test edilmedi** — özellikle interstitial'ın her seans sonunda (günde en fazla 3-4 kez, free cap nedeniyle) gösterilmesinin rahatsız edici olup olmadığı gerçek kullanımda değerlendirilmeli; gerekirse sıklık sınırlandırılabilir (örn. 2 seansta 1).
 
 ---
 
@@ -934,6 +943,42 @@ Bkz. §14 "İlerleme Göstergesi" — detaylar orada.
 Roadmap 20 skill'in tamamı artık dolu olduğu için `_RoadmapEntry.skill` hiçbir zaman null olmuyor — `_buildLockedRow`/`_showComingSoon`/"Coming soon" satırı kodu tamamen ölüydü (kullanıcının "eksik bir şey var mı" sorusuna verilen cevapta bulundu, sonra temizlendi).
 
 **Kapsam notu:** Oturum sonunda 295 test yeşil, `flutter analyze` temiz, her adım Windows'ta görsel olarak doğrulandı.
+
+---
+
+## 33. App Icon Finalizasyonu ve Reklam Monetizasyonu (2026-07-30, tek oturum)
+
+TestFlight dağıtımı + Restore Purchases oturumunun devamı — "hazır mıyız?" denetiminde bulunan app icon eksiği kapatıldı, ardından kullanıcı reklam monetizasyonu istedi.
+
+### App icon
+
+Kullanıcı Gemini ile iki ayrı kavram üretti: önce metronom+baget, sonra (son kararı) davul+baget ("Sunset Coral" turuncu gradyanlı, çizgi film tarzı). **Her iki Gemini çıktısında da aynı köşede (sağ-alt) aynı boyutta bir sparkle/yıldız artefaktı vardı** — muhtemelen Gemini'nin sabit bir imzası/watermark'ı. Temizleme yöntemi: artefaktın bounding box'ı blur-diff ile bulundu, temiz bir gradyan bölgesinden (görselin başka bir yerinden, artefaktsız) renk-eşleştirmeli (yerel ortalama renge göre parlaklık/ton kaydırılmış) bir yama kesilip üstüne yapıştırıldı, kenarları hafif feather ile yumuşatıldı — sonuç, tam boyutta bakıldığında izi görünmeyen pürüzsüz bir gradyan. 1024×1024 master'dan Python/PIL ile 15 boyutun tamamı (`ios/Runner/Assets.xcassets/AppIcon.appiconset/*.png`, 20×20'den 1024×1024'e, RGB, alfasız) üretildi.
+
+### Reklam monetizasyonu (free-tier kullanıcılar için)
+
+Kullanıcının kararı ("Hepsi. Hatta... today's session hakkını 3'ten 4'e çıkarma"): Home + Results + Today's Session'da banner, seans sonrası (Practice→Results geçişinde) interstitial, VE bir rewarded-ad ile günde +1 bonus seans hakkı. Premium kullanıcılar hiçbir reklam görmez.
+
+**Paket:** `google_mobile_ads` (banner/interstitial/rewarded) + `app_tracking_transparency` (iOS ATT izni, AdMob SDK'sından önce istenir). `in_app_purchase` ile aynı risk profili — sadece Android/iOS platform implementasyonu var; 2026-07-30'da bağımlılık eklendikten VE UI'nin her yerine bağlandıktan sonra `flutter run -d windows`'un hâlâ çalıştığı doğrulandı.
+
+**Mimari:** `lib/infrastructure/ads/ads_service.dart` (`AdsService`) — `PurchaseService` ile aynı desen: `init()` (ATT iste → `MobileAds.instance.initialize()` → interstitial/rewarded önceden yükle), `showInterstitial()`/`showRewarded()` (`Completer` ile "kapatılana kadar bekle" + rewarded için "ödül kazanıldı mı" bilgisini döndürür), her ikisi de kapanınca otomatik yeniden ön-yükleme yapar. `AdsService.supported` (`defaultTargetPlatform` kontrolü) her gerçek SDK çağrısından önce kontrol ediliyor — Windows'ta sessizce no-op. `lib/presentation/widgets/ad_banner.dart` (`AdBanner`) — kendi `BannerAd`'ini yükleyip dispose eden, yüklenene kadar/desteklenmeyen platformda `SizedBox.shrink()` döndüren bağımsız widget.
+
+**Ad unit ID'leri şu an Google'ın herkese açık TEST ID'leri** (`ca-app-pub-3940256099942544/...`) — her zaman dolar, hiç gerçek gelir üretmez. Gerçek AdMob hesabı açılınca değiştirilmesi gerekiyor (bkz. §12 madde 21).
+
+**Rewarded bonus slot mimarisi:** `access_policy.dart`'a `freeBonusSlotCap = 1` (günde en fazla +1, biriktirilemez) ve `decideGate()`'e opsiyonel `bonusSlotsToday` parametresi eklendi (`effectiveCap = freeDailySessionCap + bonusSlotsToday.clamp(0, freeBonusSlotCap)`) — geriye dönük uyumlu (varsayılan 0), mevcut çağrı yerleri/testler değişmeden geçti. DB tarafı: yeni `AdBonusSlots` tablosu (`dateKey`, `count`), schemaVersion 4→5. `TodaySessionScreen`'de 3 slot dolunca ve bugünün bonus'u kullanılmamışsa "Watch a video for +1 session" kartı beliriyor; reklam izlenip ödül kazanılınca `db.addBonusSlot()` çağrılıyor.
+
+**Ekran zinciri değişikliği:** `AdsService` artık `main.dart` → `HomeScreen`/`TodaySessionScreen` → `SessionPreviewScreen` → `PracticeScreen` → `ResultsScreen` boyunca constructor parametresi olarak taşınıyor (projede bir servis-locator/DI yok, hep açık constructor injection kullanılıyor — bu desene sadık kalındı). Interstitial `ResultsScreen.initState`'te `db.isPremium()` tek seferlik okumasından sonra, post-frame callback ile (build'i bloklamadan) tetikleniyor.
+
+**Kapsam notu:** Oturum sonunda 301 test yeşil (4 yeni `decideGate` bonus-slot testi + 2 yeni `AdBonusSlots` DB testi), `flutter analyze` temiz, `flutter run -d windows` reklam kodu eklendikten sonra da hatasız açılıyor doğrulandı. Gerçek cihazda (TestFlight) reklamların görsel doğrulaması henüz yapılmadı — bir sonraki deploy'da kontrol edilmeli.
+
+### Loop (Premium-only Practice tekrarı)
+
+Kullanıcı isteği: seçilen dersi baştan sona bitince otomatik tekrar başlatan bir "Loop" seçeneği, sadece Premium'da. `PracticeFlowController`'a `loopPractice` (bool, varsayılan false) eklendi; `poll()`'da ses akışı bitip `!engine.isPlaying` olduğunda, `loopPractice` açıksa ve mod Record değilse (`!wasRecording` — kayıtlı bir take'in net bir bitişi olmalı), `_setStage(finished)` yerine `startPractice()` yeniden çağrılıyor. Bu, `startPractice()`'ın zaten her zaman `FlowStage.countIn`'e geçmesi sayesinde **her loop turunun kendi count-in'iyle başlamasını** bedavaya getiriyor — kullanıcının "yeniden başlarken ritmi nasıl hissedecek" endişesine mimari olarak zaten cevap. Yeniden yükleme async olduğu için (`_load()` PCM'i yeniden render edip soloud'a yüklüyor), `poll()` senkron olduğundan restart "fire-and-forget" (`unawaited`) çağrılıyor; `_restartingLoop` bayrağı, bu kısa async boşlukta `poll()`'un aynı dalı tekrar tekrar tetiklemesini engelliyor.
+
+**Rozet sayımı kararı (kullanıcı, 2026-07-30):** İlk tasarımda loop turları `onSessionCompleted`'ı tetiklemiyordu (rozet sayacını şişirmesin diye) — kullanıcı bunu tersine çevirdi: "rozet işini saysın, her loop sayılsın." Şimdi her tamamlanan loop turu da normal bir seans gibi `onSessionCompleted`'ı tetikliyor.
+
+**UI:** `SessionPreviewScreen`, `ResultsScreen`'deki gibi tek seferlik `db.isPremium()` okumasıyla kendi `_premium` durumunu tutuyor; "Reference hits" switch'inin altında, sadece Premium'da görünen bir "Loop" `SwitchListTile`'ı var (premium rozet ikonuyla).
+
+**Doğrulama notu:** İlk elden test denemesinde loop çalışmadı gibi göründü (sonuç ekranına düştü) — kök neden koddan değil, muhtemelen kesilmiş/eski bir `flutter run` process'ine karşı test edilmiş olmasından kaynaklandı (önceki smoke-test komutları `timeout 90` ile otomatik kesiliyordu). Zaman aşımı olmadan taze bir `flutter run -d windows` başlatılıp yeniden denendiğinde loop doğru çalıştı — kullanıcı onayladı ("tamam şimdi oldu").
 
 ---
 

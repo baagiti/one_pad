@@ -5,6 +5,7 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'application/session_flow/practice_flow_controller.dart';
 import 'domain/content/content_loader.dart';
 import 'domain/model/skill.dart';
+import 'infrastructure/ads/ads_service.dart';
 import 'infrastructure/audio/audio_engine.dart';
 import 'infrastructure/audio/audio_recorder.dart';
 import 'infrastructure/audio/click_sounds.dart';
@@ -51,6 +52,7 @@ class _OnePadAppState extends State<OnePadApp> {
   late final PracticeFlowController _controller;
   late final AppDatabase _db;
   late final PurchaseService _purchases;
+  late final AdsService _ads;
   late final Future<List<Skill>> _bootstrap;
 
   @override
@@ -68,12 +70,16 @@ class _OnePadAppState extends State<OnePadApp> {
           bpm: session.bpm,
         );
     _purchases = PurchaseService(db: _db);
-    // in_app_purchase only ships Android/iOS platform implementations —
-    // touching it on any other platform (Windows during dev testing) would
-    // throw, so it's only ever started here.
+    _ads = AdsService();
+    // in_app_purchase/google_mobile_ads only ship Android/iOS platform
+    // implementations — touching either on any other platform (Windows
+    // during dev testing) would throw, so they're only ever started here.
+    // AdsService.init() also no-ops internally on unsupported platforms;
+    // the outer check just avoids the pointless call.
     if (defaultTargetPlatform == TargetPlatform.iOS ||
         defaultTargetPlatform == TargetPlatform.android) {
       _purchases.listen();
+      _ads.init();
     }
     _bootstrap = _init();
   }
@@ -120,6 +126,7 @@ class _OnePadAppState extends State<OnePadApp> {
             skills: snapshot.data!,
             db: _db,
             purchases: _purchases,
+            ads: _ads,
           );
         },
       ),

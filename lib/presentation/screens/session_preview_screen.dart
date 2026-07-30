@@ -4,6 +4,7 @@ import 'package:flutter/scheduler.dart';
 import '../../application/session_flow/practice_flow_controller.dart';
 import '../../application/tempo/tap_tempo_calculator.dart';
 import '../../domain/timeline/timeline_map.dart';
+import '../../infrastructure/ads/ads_service.dart';
 import '../../infrastructure/audio/recording_paths.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../notation/notation_view.dart';
@@ -16,6 +17,7 @@ import 'practice_screen.dart';
 class SessionPreviewScreen extends StatefulWidget {
   final PracticeFlowController controller;
   final AppDatabase db;
+  final AdsService ads;
 
   /// This level's practice tip (`Level.note`), if it has one — shown as a
   /// small hint above the action buttons.
@@ -25,6 +27,7 @@ class SessionPreviewScreen extends StatefulWidget {
     super.key,
     required this.controller,
     required this.db,
+    required this.ads,
     this.levelNote,
   });
 
@@ -37,6 +40,7 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
   late final Ticker _ticker;
   TimelinePosition? _pos;
   final _tapTempo = TapTempoCalculator();
+  bool _premium = false;
 
   PracticeFlowController get controller => widget.controller;
 
@@ -49,6 +53,9 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
         _pos = pos;
         if (controller.stage == FlowStage.idle) _ticker.stop();
       });
+    });
+    widget.db.isPremium().then((premium) {
+      if (mounted) setState(() => _premium = premium);
     });
   }
 
@@ -80,7 +87,11 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
     if (!mounted) return;
     await Navigator.of(context).pushReplacement(
       MaterialPageRoute(
-        builder: (_) => PracticeScreen(controller: controller, db: widget.db),
+        builder: (_) => PracticeScreen(
+          controller: controller,
+          db: widget.db,
+          ads: widget.ads,
+        ),
       ),
     );
   }
@@ -98,6 +109,7 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
         builder: (_) => PracticeScreen(
           controller: controller,
           db: widget.db,
+          ads: widget.ads,
           recordingFilePath: filePath,
         ),
       ),
@@ -152,6 +164,21 @@ class _SessionPreviewScreenState extends State<SessionPreviewScreen>
                       ? null
                       : (v) => setState(() => controller.referenceHits = v),
                 ),
+                if (_premium)
+                  SwitchListTile(
+                    title: const Text('Loop'),
+                    subtitle: const Text(
+                      'Repeat this lesson with a fresh count-in each time',
+                    ),
+                    secondary: const Icon(
+                      Icons.workspace_premium_outlined,
+                      color: AppColors.secondary,
+                    ),
+                    value: controller.loopPractice,
+                    onChanged: previewing
+                        ? null
+                        : (v) => setState(() => controller.loopPractice = v),
+                  ),
                 const SizedBox(height: 8),
                 Row(
                   children: [

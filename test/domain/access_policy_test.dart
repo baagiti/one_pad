@@ -90,4 +90,60 @@ void main() {
       );
     });
   });
+
+  group('decideGate rewarded-ad bonus slot (2026-07-30)', () {
+    test('the 4th new lesson is blocked with no bonus slot earned yet', () {
+      expect(
+        decideGate(
+          premium: false,
+          skillId: 'quarter_note_pulse',
+          alreadyUnlockedToday: false,
+          todayUnlockCount: 3,
+          bonusSlotsToday: 0,
+        ),
+        GateDecision.upsellCapReached,
+      );
+    });
+
+    test('the 4th new lesson is allowed once one bonus slot is earned', () {
+      expect(
+        decideGate(
+          premium: false,
+          skillId: 'quarter_note_pulse',
+          alreadyUnlockedToday: false,
+          todayUnlockCount: 3,
+          bonusSlotsToday: 1,
+        ),
+        GateDecision.allow,
+      );
+    });
+
+    test('a 5th new lesson is still blocked even with a bonus slot earned',
+        () {
+      expect(
+        decideGate(
+          premium: false,
+          skillId: 'quarter_note_pulse',
+          alreadyUnlockedToday: false,
+          todayUnlockCount: 4,
+          bonusSlotsToday: 1,
+        ),
+        GateDecision.upsellCapReached,
+      );
+    });
+
+    test('bonus slots beyond freeBonusSlotCap do not grant a 5th', () {
+      expect(freeBonusSlotCap, 1);
+      expect(
+        decideGate(
+          premium: false,
+          skillId: 'quarter_note_pulse',
+          alreadyUnlockedToday: false,
+          todayUnlockCount: 4,
+          bonusSlotsToday: 2, // more than the cap allows
+        ),
+        GateDecision.upsellCapReached,
+      );
+    });
+  });
 }

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
@@ -54,16 +55,33 @@ class PracticeFlowController extends ChangeNotifier {
   /// Preview option (spec §5). Practice playback never includes them.
   bool referenceHits = true;
 
+  /// Premium-only Practice option (2026-07-30): when the timeline runs out
+  /// during [FlowStage.practicing], restart from a fresh count-in instead
+  /// of finishing — same restart path [startPractice] always uses, so the
+  /// count-in the user hears at the very start of any practice run also
+  /// plays again before every loop rep, exactly the cue that makes the
+  /// brief reload gap feel like a normal restart rather than a stutter.
+  /// Never applies to Record mode — a recorded take must have one definite
+  /// end to score. Each completed loop rep still fires
+  /// [onSessionCompleted] (user decision, 2026-07-30) — looping is a
+  /// legitimate way to rack up genuine reps of a lesson, so it counts
+  /// toward the Home screen's rep-count tier badges exactly like any other
+  /// completed session would.
+  bool loopPractice = false;
+  bool _restartingLoop = false;
+
   bool _isRecording = false;
   bool get isRecording => _isRecording;
 
   String? _recordingPath;
   String? get recordingPath => _recordingPath;
 
-  /// Fired exactly once, the moment a practice session completes (spec §4:
-  /// all 16 exercises played through). The UI layer wires this to
-  /// persistence (Home screen progress, design doc §14) — kept as a
-  /// callback so the state machine itself stays storage-agnostic.
+  /// Fired every time a practice session completes (spec §4: all 16
+  /// exercises played through) — once per pass, so a looped practice run
+  /// ([loopPractice]) fires this once per rep, not just once for the whole
+  /// run. The UI layer wires this to persistence (Home screen progress,
+  /// design doc §14) — kept as a callback so the state machine itself stays
+  /// storage-agnostic.
   void Function(Session session)? onSessionCompleted;
 
   /// Only initializes [engine] here — [recorder] is lazily initialized on
@@ -168,7 +186,18 @@ class PracticeFlowController extends ChangeNotifier {
     if (!engine.isPlaying) {
       // Stream ran out: preview returns to idle, practice completes.
       final wasPracticing = _stage == FlowStage.practicing;
+      final wasRecording = _isRecording;
       _stopRecordingIfActive();
+      if (wasPracticing && !wasRecording && loopPractice && !_restartingLoop) {
+        _restartingLoop = true;
+        onSessionCompleted?.call(_session!);
+        // Fire-and-forget: poll() can't await. Stage is left as-is (still
+        // "practicing") for the brief reload gap; _restartingLoop guards
+        // against poll() re-entering this branch on every tick until
+        // startPractice() flips the stage back to countIn itself.
+        unawaited(startPractice().then((_) => _restartingLoop = false));
+        return pos;
+      }
       _setStage(_stage == FlowStage.previewing
           ? FlowStage.idle
           : FlowStage.finished);

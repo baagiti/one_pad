@@ -3,6 +3,7 @@ import 'package:flutter/scheduler.dart';
 
 import '../../application/session_flow/practice_flow_controller.dart';
 import '../../domain/timeline/timeline_map.dart';
+import '../../infrastructure/ads/ads_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../notation/notation_view.dart';
 import '../theme/app_theme.dart';
@@ -13,6 +14,7 @@ import 'results_screen.dart';
 class PracticeScreen extends StatefulWidget {
   final PracticeFlowController controller;
   final AppDatabase db;
+  final AdsService ads;
 
   /// When set, this run is a Record-mode take (design doc §9, M3): the
   /// microphone captures to this path instead of the pad's reference hits
@@ -23,6 +25,7 @@ class PracticeScreen extends StatefulWidget {
     super.key,
     required this.controller,
     required this.db,
+    required this.ads,
     this.recordingFilePath,
   });
 
@@ -92,7 +95,11 @@ class _PracticeScreenState extends State<PracticeScreen>
     if (controller.stage == FlowStage.finished) {
       _ticker.stop();
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => ResultsScreen(controller: controller, db: widget.db),
+        builder: (_) => ResultsScreen(
+          controller: controller,
+          db: widget.db,
+          ads: widget.ads,
+        ),
       ));
     }
   }

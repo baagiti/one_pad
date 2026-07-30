@@ -844,6 +844,252 @@ class PremiumSettingsCompanion extends UpdateCompanion<PremiumSetting> {
   }
 }
 
+class $AdBonusSlotsTable extends AdBonusSlots
+    with TableInfo<$AdBonusSlotsTable, AdBonusSlot> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $AdBonusSlotsTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _dateKeyMeta = const VerificationMeta(
+    'dateKey',
+  );
+  @override
+  late final GeneratedColumn<String> dateKey = GeneratedColumn<String>(
+    'date_key',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  static const VerificationMeta _countMeta = const VerificationMeta('count');
+  @override
+  late final GeneratedColumn<int> count = GeneratedColumn<int>(
+    'count',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(0),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, dateKey, count];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'ad_bonus_slots';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<AdBonusSlot> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('date_key')) {
+      context.handle(
+        _dateKeyMeta,
+        dateKey.isAcceptableOrUnknown(data['date_key']!, _dateKeyMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_dateKeyMeta);
+    }
+    if (data.containsKey('count')) {
+      context.handle(
+        _countMeta,
+        count.isAcceptableOrUnknown(data['count']!, _countMeta),
+      );
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  AdBonusSlot map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return AdBonusSlot(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      dateKey: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}date_key'],
+      )!,
+      count: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}count'],
+      )!,
+    );
+  }
+
+  @override
+  $AdBonusSlotsTable createAlias(String alias) {
+    return $AdBonusSlotsTable(attachedDatabase, alias);
+  }
+}
+
+class AdBonusSlot extends DataClass implements Insertable<AdBonusSlot> {
+  final int id;
+  final String dateKey;
+  final int count;
+  const AdBonusSlot({
+    required this.id,
+    required this.dateKey,
+    required this.count,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['date_key'] = Variable<String>(dateKey);
+    map['count'] = Variable<int>(count);
+    return map;
+  }
+
+  AdBonusSlotsCompanion toCompanion(bool nullToAbsent) {
+    return AdBonusSlotsCompanion(
+      id: Value(id),
+      dateKey: Value(dateKey),
+      count: Value(count),
+    );
+  }
+
+  factory AdBonusSlot.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return AdBonusSlot(
+      id: serializer.fromJson<int>(json['id']),
+      dateKey: serializer.fromJson<String>(json['dateKey']),
+      count: serializer.fromJson<int>(json['count']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'dateKey': serializer.toJson<String>(dateKey),
+      'count': serializer.toJson<int>(count),
+    };
+  }
+
+  AdBonusSlot copyWith({int? id, String? dateKey, int? count}) => AdBonusSlot(
+    id: id ?? this.id,
+    dateKey: dateKey ?? this.dateKey,
+    count: count ?? this.count,
+  );
+  AdBonusSlot copyWithCompanion(AdBonusSlotsCompanion data) {
+    return AdBonusSlot(
+      id: data.id.present ? data.id.value : this.id,
+      dateKey: data.dateKey.present ? data.dateKey.value : this.dateKey,
+      count: data.count.present ? data.count.value : this.count,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AdBonusSlot(')
+          ..write('id: $id, ')
+          ..write('dateKey: $dateKey, ')
+          ..write('count: $count')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, dateKey, count);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is AdBonusSlot &&
+          other.id == this.id &&
+          other.dateKey == this.dateKey &&
+          other.count == this.count);
+}
+
+class AdBonusSlotsCompanion extends UpdateCompanion<AdBonusSlot> {
+  final Value<int> id;
+  final Value<String> dateKey;
+  final Value<int> count;
+  const AdBonusSlotsCompanion({
+    this.id = const Value.absent(),
+    this.dateKey = const Value.absent(),
+    this.count = const Value.absent(),
+  });
+  AdBonusSlotsCompanion.insert({
+    this.id = const Value.absent(),
+    required String dateKey,
+    this.count = const Value.absent(),
+  }) : dateKey = Value(dateKey);
+  static Insertable<AdBonusSlot> custom({
+    Expression<int>? id,
+    Expression<String>? dateKey,
+    Expression<int>? count,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (dateKey != null) 'date_key': dateKey,
+      if (count != null) 'count': count,
+    });
+  }
+
+  AdBonusSlotsCompanion copyWith({
+    Value<int>? id,
+    Value<String>? dateKey,
+    Value<int>? count,
+  }) {
+    return AdBonusSlotsCompanion(
+      id: id ?? this.id,
+      dateKey: dateKey ?? this.dateKey,
+      count: count ?? this.count,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (dateKey.present) {
+      map['date_key'] = Variable<String>(dateKey.value);
+    }
+    if (count.present) {
+      map['count'] = Variable<int>(count.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('AdBonusSlotsCompanion(')
+          ..write('id: $id, ')
+          ..write('dateKey: $dateKey, ')
+          ..write('count: $count')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -854,6 +1100,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $PremiumSettingsTable premiumSettings = $PremiumSettingsTable(
     this,
   );
+  late final $AdBonusSlotsTable adBonusSlots = $AdBonusSlotsTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -862,6 +1109,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     practiceSessions,
     dailyUnlocks,
     premiumSettings,
+    adBonusSlots,
   ];
 }
 
@@ -1374,6 +1622,159 @@ typedef $$PremiumSettingsTableProcessedTableManager =
       PremiumSetting,
       PrefetchHooks Function()
     >;
+typedef $$AdBonusSlotsTableCreateCompanionBuilder =
+    AdBonusSlotsCompanion Function({
+      Value<int> id,
+      required String dateKey,
+      Value<int> count,
+    });
+typedef $$AdBonusSlotsTableUpdateCompanionBuilder =
+    AdBonusSlotsCompanion Function({
+      Value<int> id,
+      Value<String> dateKey,
+      Value<int> count,
+    });
+
+class $$AdBonusSlotsTableFilterComposer
+    extends Composer<_$AppDatabase, $AdBonusSlotsTable> {
+  $$AdBonusSlotsTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get dateKey => $composableBuilder(
+    column: $table.dateKey,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get count => $composableBuilder(
+    column: $table.count,
+    builder: (column) => ColumnFilters(column),
+  );
+}
+
+class $$AdBonusSlotsTableOrderingComposer
+    extends Composer<_$AppDatabase, $AdBonusSlotsTable> {
+  $$AdBonusSlotsTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get dateKey => $composableBuilder(
+    column: $table.dateKey,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<int> get count => $composableBuilder(
+    column: $table.count,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$AdBonusSlotsTableAnnotationComposer
+    extends Composer<_$AppDatabase, $AdBonusSlotsTable> {
+  $$AdBonusSlotsTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get dateKey =>
+      $composableBuilder(column: $table.dateKey, builder: (column) => column);
+
+  GeneratedColumn<int> get count =>
+      $composableBuilder(column: $table.count, builder: (column) => column);
+}
+
+class $$AdBonusSlotsTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $AdBonusSlotsTable,
+          AdBonusSlot,
+          $$AdBonusSlotsTableFilterComposer,
+          $$AdBonusSlotsTableOrderingComposer,
+          $$AdBonusSlotsTableAnnotationComposer,
+          $$AdBonusSlotsTableCreateCompanionBuilder,
+          $$AdBonusSlotsTableUpdateCompanionBuilder,
+          (
+            AdBonusSlot,
+            BaseReferences<_$AppDatabase, $AdBonusSlotsTable, AdBonusSlot>,
+          ),
+          AdBonusSlot,
+          PrefetchHooks Function()
+        > {
+  $$AdBonusSlotsTableTableManager(_$AppDatabase db, $AdBonusSlotsTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$AdBonusSlotsTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$AdBonusSlotsTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$AdBonusSlotsTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> dateKey = const Value.absent(),
+                Value<int> count = const Value.absent(),
+              }) =>
+                  AdBonusSlotsCompanion(id: id, dateKey: dateKey, count: count),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String dateKey,
+                Value<int> count = const Value.absent(),
+              }) => AdBonusSlotsCompanion.insert(
+                id: id,
+                dateKey: dateKey,
+                count: count,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map((e) => (e.readTable(table), BaseReferences(db, table, e)))
+              .toList(),
+          prefetchHooksCallback: null,
+        ),
+      );
+}
+
+typedef $$AdBonusSlotsTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $AdBonusSlotsTable,
+      AdBonusSlot,
+      $$AdBonusSlotsTableFilterComposer,
+      $$AdBonusSlotsTableOrderingComposer,
+      $$AdBonusSlotsTableAnnotationComposer,
+      $$AdBonusSlotsTableCreateCompanionBuilder,
+      $$AdBonusSlotsTableUpdateCompanionBuilder,
+      (
+        AdBonusSlot,
+        BaseReferences<_$AppDatabase, $AdBonusSlotsTable, AdBonusSlot>,
+      ),
+      AdBonusSlot,
+      PrefetchHooks Function()
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -1384,4 +1785,6 @@ class $AppDatabaseManager {
       $$DailyUnlocksTableTableManager(_db, _db.dailyUnlocks);
   $$PremiumSettingsTableTableManager get premiumSettings =>
       $$PremiumSettingsTableTableManager(_db, _db.premiumSettings);
+  $$AdBonusSlotsTableTableManager get adBonusSlots =>
+      $$AdBonusSlotsTableTableManager(_db, _db.adBonusSlots);
 }

@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../application/session_flow/practice_flow_controller.dart';
 import '../../domain/model/skill.dart';
 import '../../domain/progress/access_policy.dart';
+import '../../infrastructure/ads/ads_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
+import '../widgets/ad_banner.dart';
 import 'session_preview_screen.dart';
 
 /// What "Today's Session" on Home now opens into (2026-07-27) — moved off
@@ -20,12 +22,14 @@ class TodaySessionScreen extends StatelessWidget {
   final PracticeFlowController controller;
   final AppDatabase db;
   final List<Skill> skills;
+  final AdsService ads;
 
   const TodaySessionScreen({
     super.key,
     required this.controller,
     required this.db,
     required this.skills,
+    required this.ads,
   });
 
   Future<void> _open(BuildContext context, Skill skill, int level, int bpm) async {
@@ -35,10 +39,27 @@ class TodaySessionScreen extends StatelessWidget {
         builder: (_) => SessionPreviewScreen(
           controller: controller,
           db: db,
+          ads: ads,
           levelNote: skill.level(level).note,
         ),
       ),
     );
+  }
+
+  /// Rewarded-ad bonus slot (design doc, 2026-07-30): watching through to
+  /// completion grants exactly one extra free session for today, on top of
+  /// [freeDailySessionCap] — see [freeBonusSlotCap]'s doc comment for why
+  /// it's capped at +1/day rather than stacking.
+  Future<void> _watchAdForBonusSlot(BuildContext context) async {
+    final earned = await ads.showRewarded();
+    if (!earned) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Ad not available right now — try again soon.')),
+      );
+      return;
+    }
+    await db.addBonusSlot();
   }
 
   @override
@@ -58,36 +79,97 @@ class TodaySessionScreen extends StatelessWidget {
   Widget _buildFree(BuildContext context) {
     return StreamBuilder<List<DailyUnlock>>(
       stream: db.watchTodayUnlocks(),
-      builder: (context, snapshot) {
-        final unlocks = snapshot.data ?? const [];
+      builder: (context, unlocksSnap) {
+        final unlocks = unlocksSnap.data ?? const [];
         final byId = {for (final s in skills) s.id: s};
-        return ListView(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
-          children: [
-            Text(
-              '${unlocks.length}/$freeDailySessionCap used today',
-              style: Theme.of(context).textTheme.bodySmall,
-            ),
-            const SizedBox(height: 12),
-            for (var i = 0; i < freeDailySessionCap; i++)
-              if (i < unlocks.length && byId[unlocks[i].skillId] != null)
-                _buildSlot(
-                  context,
-                  skill: byId[unlocks[i].skillId]!,
-                  level: unlocks[i].level,
-                  bpm: freeBpm,
-                )
-              else
-                _buildEmptySlot(context, "Free slot available"),
-            const SizedBox(height: 8),
-            Text(
-              'Pick a lesson from the roadmap on Home to fill an empty '
-              'slot.',
-              style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
-            ),
-          ],
+        return StreamBuilder<int>(
+          stream: db.watchTodayBonusSlots(),
+          builder: (context, bonusSnap) {
+            final bonusSlots = (bonusSnap.data ?? 0).clamp(0, freeBonusSlotCap);
+            final effectiveCap = freeDailySessionCap + bonusSlots;
+            final capReached = unlocks.length >= freeDailySessionCap;
+            final bonusAvailable = bonusSlots < freeBonusSlotCap;
+            return ListView(
+              padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+              children: [
+                Text(
+                  '${unlocks.length}/$effectiveCap used today',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(height: 12),
+                for (var i = 0; i < effectiveCap; i++)
+                  if (i < unlocks.length && byId[unlocks[i].skillId] != null)
+                    _buildSlot(
+                      context,
+                      skill: byId[unlocks[i].skillId]!,
+                      level: unlocks[i].level,
+                      bpm: freeBpm,
+                    )
+                  else
+                    _buildEmptySlot(context, "Free slot available"),
+                if (capReached && bonusAvailable) ...[
+                  const SizedBox(height: 4),
+                  _buildWatchAdCard(context),
+                ],
+                const SizedBox(height: 8),
+                Text(
+                  'Pick a lesson from the roadmap on Home to fill an empty '
+                  'slot.',
+                  style: TextStyle(color: AppColors.textSecondary, fontSize: 12),
+                ),
+                const SizedBox(height: 20),
+                Center(child: AdBanner(ads: ads)),
+              ],
+            );
+          },
         );
       },
+    );
+  }
+
+  Widget _buildWatchAdCard(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(16),
+          onTap: () => _watchAdForBonusSlot(context),
+          child: Container(
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: AppColors.secondary.withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: AppColors.secondary),
+            ),
+            child: Row(
+              children: [
+                const Icon(Icons.play_circle_outline,
+                    color: AppColors.secondary),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Watch a video for +1 session',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        "Today's free slots are used up",
+                        style: Theme.of(context).textTheme.bodySmall,
+                      ),
+                    ],
+                  ),
+                ),
+                const Icon(Icons.chevron_right,
+                    color: AppColors.textSecondary),
+              ],
+            ),
+          ),
+        ),
+      ),
     );
   }
 
