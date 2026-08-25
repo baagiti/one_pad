@@ -1,25 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart' show PlatformException;
+import 'package:purchases_flutter/purchases_flutter.dart'
+    show PurchasesErrorCode, PurchasesErrorHelper;
 
 import '../../infrastructure/iap/purchase_service.dart';
 import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
 
 /// The real paywall screen (2026-07-27) — what "Go Premium" actually opens
-/// now, instead of jumping straight to a confirm dialog. Price is shown as
-/// one fixed USD string because there's no real purchase flow yet
-/// (StoreKit/RevenueCat, design doc §12): once the product is set up in
-/// App Store Connect at the $4.99 price tier, Apple converts and displays
-/// that tier's equivalent in every storefront's own currency automatically
-/// — that's a server-side/App-Store-side conversion, not something this
-/// app computes itself, so there's no exchange-rate code to write here.
-/// `_subscribe` is a dev-only stand-in for that real flow.
+/// now, instead of jumping straight to a confirm dialog. `_subscribe` and
+/// `_restore` (2026-08-25) go through the real
+/// [PurchaseService.buyPremium]/[PurchaseService.restorePurchases], backed
+/// by RevenueCat — both are wrapped in try/catch because the platform's IAP
+/// implementation isn't guaranteed present (e.g. this screen is still
+/// reachable on Windows during dev testing), and `_subscribe` treats
+/// [PurchasesErrorCode.purchaseCancelledError] as a silent no-op rather than
+/// an error worth surfacing.
 ///
-/// Restore Purchases (2026-07-30) is wired to the real
-/// [PurchaseService.restorePurchases] — safe to ship before
-/// [PurchaseService.premiumProductId] exists in App Store Connect, since it
-/// just comes back empty until it does. It's wrapped in try/catch because
-/// the platform's IAP implementation isn't guaranteed present (e.g. this
-/// screen is still reachable on Windows during dev testing).
+/// The in-app price is shown as a bare `$4` (2026-08-25 decision) rather
+/// than the store-formatted `$4.00` — deliberately simplified marketing
+/// copy for this screen only. The actual App Store checkout sheet still
+/// shows Apple's own formatted price (`$4.00` and each storefront's
+/// converted equivalent), which this app has no control over and doesn't
+/// need to match.
 class PremiumScreen extends StatelessWidget {
   final AppDatabase db;
   final PurchaseService purchases;
@@ -52,29 +55,29 @@ class PremiumScreen extends StatelessWidget {
   ];
 
   Future<void> _subscribe(BuildContext context) async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Subscribe (dev)'),
-        content: const Text(
-          "No real purchase flow yet — this just flips the local dev "
-          'Premium flag so the feature can be tested end to end.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
-          ),
-          FilledButton(
-            onPressed: () => Navigator.of(context).pop(true),
-            child: const Text('Subscribe'),
-          ),
-        ],
-      ),
-    );
-    if (confirmed != true) return;
-    await db.setPremium(true);
-    if (context.mounted) Navigator.of(context).pop();
+    final messenger = ScaffoldMessenger.of(context);
+    try {
+      if (!await purchases.isAvailable()) {
+        messenger.showSnackBar(
+          const SnackBar(content: Text("Can't reach the App Store right now.")),
+        );
+        return;
+      }
+      await purchases.buyPremium();
+      if (context.mounted) Navigator.of(context).pop();
+    } on PlatformException catch (e) {
+      if (PurchasesErrorHelper.getErrorCode(e) ==
+          PurchasesErrorCode.purchaseCancelledError) {
+        return;
+      }
+      messenger.showSnackBar(
+        const SnackBar(content: Text("Couldn't complete the purchase.")),
+      );
+    } catch (_) {
+      messenger.showSnackBar(
+        const SnackBar(content: Text("Couldn't complete the purchase.")),
+      );
+    }
   }
 
   Future<void> _restore(BuildContext context) async {
@@ -197,7 +200,7 @@ class PremiumScreen extends StatelessWidget {
                         text: TextSpan(
                           style: Theme.of(context).textTheme.headlineSmall,
                           children: const [
-                            TextSpan(text: '\$4.99'),
+                            TextSpan(text: '\$4'),
                             TextSpan(
                               text: ' / month',
                               style: TextStyle(

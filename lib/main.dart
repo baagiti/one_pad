@@ -71,14 +71,14 @@ class _OnePadAppState extends State<OnePadApp> {
         );
     _purchases = PurchaseService(db: _db);
     _ads = AdsService();
-    // in_app_purchase/google_mobile_ads only ship Android/iOS platform
+    // purchases_flutter/google_mobile_ads only ship Android/iOS platform
     // implementations — touching either on any other platform (Windows
     // during dev testing) would throw, so they're only ever started here.
     // AdsService.init() also no-ops internally on unsupported platforms;
     // the outer check just avoids the pointless call.
     if (defaultTargetPlatform == TargetPlatform.iOS ||
         defaultTargetPlatform == TargetPlatform.android) {
-      _purchases.listen();
+      _purchases.configure();
       _ads.init();
     }
     _bootstrap = _init();

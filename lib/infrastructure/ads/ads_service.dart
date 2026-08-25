@@ -10,27 +10,25 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 /// access_policy.dart). Premium users never see any of this — every call
 /// site gates on `!premium` before touching [AdsService].
 ///
-/// Ad unit IDs below are Google's published *test* IDs (safe to ship in
-/// debug/TestFlight builds, always fill, never earn real revenue) — swap
-/// for real IDs from a real AdMob account before a production release
-/// (design doc open topic).
+/// Ad unit IDs below are real production IDs from the "Stick Trainer" app
+/// on the studio's AdMob account (podegitim@gmail.com), created 2026-08-25 —
+/// see [PurchaseService] for the equivalent RevenueCat/App Store Connect
+/// setup for the Premium subscription.
 ///
 /// `google_mobile_ads` only ships Android/iOS platform implementations —
-/// same shape of risk as `in_app_purchase` (design doc §12, item 15);
+/// same shape of risk as `purchases_flutter` (design doc §12, item 15);
 /// verified 2026-07-30 that adding it doesn't break `flutter run -d
 /// windows`. [supported] gates every real call so nothing here is ever
 /// invoked on an unsupported platform.
 class AdsService {
-  static const testBannerAdUnitId = 'ca-app-pub-3940256099942544/2934735716';
-  static const testInterstitialAdUnitId =
-      'ca-app-pub-3940256099942544/4411468910';
-  static const testRewardedAdUnitId = 'ca-app-pub-3940256099942544/1712485313';
+  static const bannerAdUnitId = 'ca-app-pub-7842996095218621/7035016862';
+  static const interstitialAdUnitId =
+      'ca-app-pub-7842996095218621/5598696598';
+  static const rewardedAdUnitId = 'ca-app-pub-7842996095218621/5248176952';
 
   static bool get supported =>
       defaultTargetPlatform == TargetPlatform.iOS ||
       defaultTargetPlatform == TargetPlatform.android;
-
-  String get bannerAdUnitId => testBannerAdUnitId;
 
   InterstitialAd? _interstitial;
   RewardedAd? _rewarded;
@@ -54,7 +52,7 @@ class AdsService {
   void preloadInterstitial() {
     if (!supported) return;
     InterstitialAd.load(
-      adUnitId: testInterstitialAdUnitId,
+      adUnitId: interstitialAdUnitId,
       request: const AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) => _interstitial = ad,
@@ -89,7 +87,7 @@ class AdsService {
   void preloadRewarded() {
     if (!supported) return;
     RewardedAd.load(
-      adUnitId: testRewardedAdUnitId,
+      adUnitId: rewardedAdUnitId,
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) => _rewarded = ad,
