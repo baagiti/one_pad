@@ -10,6 +10,7 @@ import '../../infrastructure/storage/app_database.dart';
 import '../theme/app_theme.dart';
 import '../widgets/ad_banner.dart';
 import '../widgets/drum_head_background.dart';
+import 'how_to_hold_sticks_screen.dart';
 import 'premium_screen.dart';
 import 'session_preview_screen.dart';
 import 'today_session_screen.dart';
@@ -236,6 +237,12 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  Future<void> _openHowToHold() {
+    return Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => const HowToHoldSticksScreen()),
+    );
+  }
+
   Future<void> _openTodaySessionScreen() {
     return Navigator.of(context).push(
       MaterialPageRoute(
@@ -306,6 +313,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 'Practice. Listen. Improve.',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
+              const SizedBox(height: 10),
+              _buildHowToHoldButton(context),
             ],
           ),
         ),
@@ -317,6 +326,38 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ],
+    );
+  }
+
+  /// Small pill under the tagline (2026-09-18) that opens the illustrated
+  /// grip guide — first thing a brand-new player needs before any lesson.
+  Widget _buildHowToHoldButton(BuildContext context) {
+    return Material(
+      color: AppColors.surface,
+      shape: const StadiumBorder(side: BorderSide(color: AppColors.outline)),
+      child: InkWell(
+        key: const Key('how_to_hold_button'),
+        customBorder: const StadiumBorder(),
+        onTap: _openHowToHold,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 7),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Icon(Icons.back_hand_outlined,
+                  size: 16, color: AppColors.primary),
+              const SizedBox(width: 6),
+              Text(
+                'How to hold sticks',
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w700,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

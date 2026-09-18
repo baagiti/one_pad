@@ -1,7 +1,7 @@
 name: one_pad
 description: "Stick Trainer: rhythm training on a single practice pad, with notation, a metronome, and recorded timing-accuracy scoring."
 publish_to: 'none'
-version: 0.1.0+10
+version: 0.1.0+11
 
 environment:
   sdk: ^3.12.2
@@ -51,6 +51,7 @@ flutter:
     - content/skills/performance_fast_subdivision.json
     - content/skills/performance_rudiment_workout.json
     - assets/images/drum_pad_bg.jpg
+    - assets/images/grip/
   fonts:
     - family: Bravura
       fonts:
